@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ButtonComponent } from './shared/components/button/button.component';
-import { action } from './shared/models/store.types';
 import { InputComponent } from './shared/components/input/input.component';
+import { StoreService } from './shared/services/storeService/store.service';
+import { ApiService } from './shared/services/api-service/api.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -10,7 +11,7 @@ import { InputComponent } from './shared/components/input/input.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   textValue: string = '';
   numberValue: number = 0;
   dateValue: string = '';
@@ -21,6 +22,11 @@ export class AppComponent {
     { value: 'option2', label: 'Option 2' },
     { value: 'option3', label: 'Option 3' },
   ];
+
+  constructor(
+    private storeService:StoreService,
+    private apiService:ApiService,
+  ) {}
   callAction(k: string) {
     console.log('Button clicked in the child component');
   }
@@ -33,5 +39,9 @@ export class AppComponent {
   }
   logger(){
     console.log(this.textValue);
+  }
+
+  ngOnInit(): void {
+    
   }
 }
