@@ -21,7 +21,6 @@ export class InputComponent {
   @Input({required:true}) classList: string[] = [];
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
   showBool:boolean=false
-  selectedOption = { value: 'default', label: 'Select an option' }
   onValueChange(event: any) {
     const newValue = event.target.value;
     this.value = newValue;
