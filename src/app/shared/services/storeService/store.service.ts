@@ -15,15 +15,15 @@ export class StoreService {
   ) { }
 
   getInvoices(){
-    this.apiService.fetchInvoices().subscribe(
-      (invoices) => {
-        this.store.dispatch(InvoiceActions.fetchInvoicesSuccess({invoices}));
-      },
-      (error) => {
-        this.store.dispatch(InvoiceActions.fetchInvoicesFailure(error));
-        console.error(error)
-      }
-    )
+    // this.apiService.fetchInvoices().subscribe(
+    //   (invoices) => {
+    //     this.store.dispatch(InvoiceActions.fetchInvoicesSuccess({invoices}));
+    //   },
+    //   (error) => {
+    //     this.store.dispatch(InvoiceActions.fetchInvoicesFailure(error));
+    //     console.error(error)
+    //   }
+    // )
   }
   
   addInvoice(invoice: Invoice){

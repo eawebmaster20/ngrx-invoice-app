@@ -1,0 +1,67 @@
+main{
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem;
+}
+.table-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.invoice-card{
+    display: grid;
+    height: 120px;
+    grid-template-columns: 64%;
+    grid-template-areas:
+    "top-left top-right"
+    "bot-left bot-right";
+    .id{
+        grid-area: top-left;
+    }
+    .date{
+        padding-left: 20px;
+        height: 40px;
+        justify-self: start;
+        grid-area: bot-left;
+    }
+    .name{
+        padding-right: 20px;
+        justify-self: end;
+        grid-area: top-right;
+    }
+    .amount{
+        padding-left: 20px;
+        height: 40px;
+        justify-self: start;
+        grid-area: bot-left;
+    }
+    .card-btn{
+        border-radius: 6px;   
+        width: 104px;
+        grid-area: bot-right;
+    }
+}
+    // display: flex;
+    // justify-content: space-between;
+
+    // .left{
+    //     .id{
+    //         span{
+    //             color: var(--dark-1);
+    //         }
+    //     }
+    //     .date{
+    //         display: flex;
+    //         align-items: center;
+    //     }
+    // }
+    // .right{
+    //     .card-btn{
+    //      border-radius: 6px;   
+    //      width: 104px;
+    //     }
+    // }
+
+p{
+    margin:0;
+}

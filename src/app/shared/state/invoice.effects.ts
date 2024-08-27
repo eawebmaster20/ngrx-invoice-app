@@ -12,12 +12,12 @@ import { ApiService } from '../services/api-service/api.service';
 export class InvoiceEffects {
 
   constructor(
-    private actions$: Actions,
+    private actions: Actions,
     private storeService: ApiService,
   ) {}
 
   fetchInvoices$ = createEffect(() =>
-    this.actions$.pipe(
+    this.actions.pipe(
       ofType(InvoiceActions.fetchInvoices),
       mergeMap(() =>
         this.storeService.fetchInvoices().pipe(
@@ -35,7 +35,7 @@ export class InvoiceEffects {
   );
 
 //   addInvoice$ = createEffect(() =>
-//     this.actions$.pipe(
+//     this.actions.pipe(
 //       ofType(InvoiceActions.addInvoice),
 //       mergeMap(({ invoice }) =>
 //         this.storeService.addInvoice(invoice).pipe(  // Replace addInvoice with your API call
@@ -49,7 +49,7 @@ export class InvoiceEffects {
 //   );
 
 //   updateInvoice$ = createEffect(() =>
-//     this.actions$.pipe(
+//     this.actions.pipe(
 //       ofType(InvoiceActions.updateInvoice),
 //       switchMap(({ update }) =>
 //         this.storeService.updateInvoice(update.id, update.changes).pipe(  // Replace updateInvoice with your API call

@@ -4,6 +4,8 @@ import { ButtonComponent } from './shared/components/button/button.component';
 import { InputComponent } from './shared/components/input/input.component';
 import { StoreService } from './shared/services/storeService/store.service';
 import { ApiService } from './shared/services/api-service/api.service';
+import { Store } from '@ngrx/store';
+import { fetchInvoices } from './shared/state/invoice.action';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -22,11 +24,13 @@ export class AppComponent implements OnInit {
     { value: 'option2', label: 'Option 2' },
     { value: 'option3', label: 'Option 3' },
   ];
-
   constructor(
     private storeService:StoreService,
     private apiService:ApiService,
-  ) {}
+    private store:Store,
+  ) {
+    // this.store.dispatch(fetchInvoices())
+  }
   callAction(k: string) {
     console.log('Button clicked in the child component');
   }

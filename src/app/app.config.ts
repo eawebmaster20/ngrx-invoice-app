@@ -7,9 +7,9 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CustomDatePipe } from './shared/pipes/custom-date.pipe';
-import { counterReducer } from './counterState/counter.reducer';
 import { invoiceReducer } from './shared/state/invoice.reducer';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { InvoiceEffects } from './shared/state/invoice.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,15 +17,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideStore(),
     provideHttpClient(withFetch()),
-    provideState(
-      {
-      name: 'counter',
-      reducer: counterReducer,
-    }),
     provideState({
       name: 'invoices',
       reducer: invoiceReducer,
     }),
+    provideEffects(InvoiceEffects),
     provideStoreDevtools({maxAge:25, logOnly: false}),
     provideAnimationsAsync()
   ]

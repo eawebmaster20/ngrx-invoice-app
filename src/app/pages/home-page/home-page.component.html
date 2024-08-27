@@ -1,0 +1,52 @@
+<div class="sidebar">
+    <div class="logo-theme-container">
+        <img src="assets/images/logo.svg" alt="" srcset="">
+        <button class="theme-img-btn"></button>
+    </div>
+    <span class="divider"></span>
+    <div class="profile">
+        <span>
+            <img class="profile-img" src="assets/images/image-avatar.jpg" alt="" srcset="">
+        </span>
+    </div>
+</div>
+<main>
+    <div class="action-bar">
+        <div class="invoice-info">
+            <h2>Invoices</h2>
+            <p class="">7 invoices</p>
+        </div>
+        <div class="action-bar-action">
+            <app-input 
+            [classList]="['input','input-select']"
+            [useType]="'select'" 
+            [options]="filterOptions"
+            />
+            <app-button 
+            [classList]="['btn icon-btn btn-blue']" 
+            [buttonText]="'New'"
+            [imgUrl]="'assets/icons/add.svg'"
+            (execute)="buttonClick($event)"
+            />
+        </div>
+    </div>
+    <div class="table-container">
+        @for(invoice of invoices | async;track invoice)
+        {<div class="invoice-card">
+            <h3 class="id h3-mini"><span>#</span>RT3080</h3>
+            <div class="date">
+                <span>Due</span>
+                <p>19 Aug 2022</p>
+            </div>
+            <h3 class="h3-mini name">Jensen Huang</h3>
+            <h3 class="amount">£ 1,800.90</h3>
+            <button class="card-btn btn">
+                <span>.</span>
+                Paid
+            </button>
+        </div>}
+        @empty {
+            <p class="empty-message">No invoices found</p>
+        }
+    </div>
+</main>
