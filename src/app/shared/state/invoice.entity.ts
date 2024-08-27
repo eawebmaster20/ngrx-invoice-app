@@ -10,7 +10,7 @@ export interface InvoiceState extends EntityState<Invoice> {
 export const invoiceAdapter: EntityAdapter<Invoice> = createEntityAdapter<Invoice>();
 
 export const initialInvoiceState: InvoiceState = invoiceAdapter.getInitialState({
-  selectedInvoiceId: null,
+  selectedInvoiceId: 'RG0314',
   theme: 'light', 
   invoices: []
 });

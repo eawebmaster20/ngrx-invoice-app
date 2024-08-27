@@ -8,11 +8,13 @@ import { InvoiceState } from '../../shared/state/invoice.entity';
 import { Invoice } from '../../shared/models/store.types';
 import { selectAllInvoices, selectAllInvoicesArray, selectTheme } from '../../shared/state/invoice.selectors';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { FilterPipe } from '../../shared/pipes/filter/filter.pipe';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [InputComponent, ButtonComponent, CommonModule],
+  imports: [InputComponent, ButtonComponent, CommonModule, FilterPipe],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
@@ -24,7 +26,7 @@ export class HomePageComponent {
   ];
   invoices: Observable<Invoice[]> = this.store.select(selectAllInvoices);
   theme: Observable<any> = this.store.select(selectTheme);
-  constructor(public store:Store<{invoices:InvoiceState}>){
+  constructor(public store:Store<{invoices:InvoiceState}>, private router:Router){
     // this.invoices.subscribe(items =>console.log(items));
     // this.theme.subscribe(items =>console.log(items));
     this.store.dispatch(fetchInvoices())
@@ -34,5 +36,9 @@ export class HomePageComponent {
 
   buttonClick(event:any) {
     console.log('Button clicked in the parent component', event);
+  }
+  goToDetail(invoiceId: string) {
+    console.log('Button clicked in the parent component', invoiceId);
+    this.router.navigate(['/details'], { queryParams: { id: invoiceId } });
   }
 }
