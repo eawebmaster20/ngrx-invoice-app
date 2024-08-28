@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Invoice } from '../../models/store.types';
 
 @Pipe({
   name: 'filter',
@@ -6,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(items: any[], statusFilters: { [key: string]: boolean }): any[] {
+  transform(items: Invoice[] | null, statusFilters: { [key: string]: boolean }): Invoice[] | null {
     if (!items || !statusFilters) {
       return items;
     }
