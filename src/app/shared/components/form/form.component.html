@@ -1,0 +1,184 @@
+<div class="container-fluid">
+    <span class="back-btn">back</span>
+    <div class="form-container">
+        <h1>New Invoice</h1>
+        <div class="bill-from">
+            <p>Bill Form</p>
+            <div class="grid-container">
+                <div class="input-group input-group-1">
+                    <label class="text-muted" for="app-input-1">Street Address</label>
+                    <app-input 
+                        (valueChange)="logDate(in1.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in1
+                    />
+                </div>
+                <div class="input-group input-group-2">
+                    <label class="text-muted" for="app-input-2">City</label>
+                    <app-input 
+                        (valueChange)="logDate(in2.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in2
+                    />
+                </div>
+                <div class="input-group input-group-3">
+                    <label class="text-muted" for="app-input-3">State</label>
+                    <app-input 
+                        (valueChange)="logDate(in3.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in3
+                    />
+                </div>
+                <div class="input-group input-group-4">
+                    <label class="text-muted" for="app-input-4">Postal Code</label>
+                    <app-input 
+                        (valueChange)="logDate(in4.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in4
+                    />
+                </div>
+            </div>                     
+        </div>
+        <div class="bill-to">
+            <p>Bill To</p>
+            <div class="bill-to-container">
+                <div class="input-group input-group-1">
+                    <label class="text-muted" for="app-input-1">Client's Name</label>
+                    <app-input 
+                        (valueChange)="logDate(in1.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in1
+                    />
+                </div>
+                <div class="input-group input-group-2">
+                    <label class="text-muted" for="app-input-2">Client's Email</label>
+                    <app-input 
+                        (valueChange)="logDate(in2.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in2
+                    />
+                </div>
+                <div class="input-group input-group-3">
+                    <label class="text-muted" for="app-input-3">Street Address</label>
+                    <app-input 
+                        (valueChange)="logDate(in3.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in3
+                    />
+                </div>
+                <div class="input-group input-group-4">
+                    <label class="text-muted" for="app-input-4">City</label>
+                    <app-input 
+                        (valueChange)="logDate(in4.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in4
+                    />
+                </div>
+                <div class="input-group input-group-5">
+                    <label class="text-muted" for="app-input-4">Post Code</label>
+                    <app-input 
+                        (valueChange)="logDate(in4.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in4
+                    />
+                </div>
+                <div class="input-group input-group-6">
+                    <label class="text-muted" for="app-input-4">Country</label>
+                    <app-input 
+                        (valueChange)="logDate(in4.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in4
+                    />
+                </div>
+                <div class="input-group input-group-7">
+                    <label class="text-muted" for="app-input-4">Invoice Date</label>
+                    <app-input 
+                        (valueChange)="logDate(in4.value)" 
+                        [classList]="['input','input-date','input-text']" 
+                        [useType]="'date'"
+                        [(value)]="textValue"
+                        #in4
+                    />
+                </div>
+                <div class="input-group input-group-8"> 
+                    <label class="text-muted" for="app-input-4">Payment Terms</label>
+                    <app-input 
+                        (valueChange)="logDate(in4.value)" 
+                        [classList]="['input','input-select']" 
+                        [useType]="'select'" 
+                        [options]="options"
+                        [(value)]="textValue"
+                        #in4
+                    />
+                </div>
+                <div class="input-group input-group-9"> 
+                    <label class="text-muted" for="app-input-4">Project Description</label>
+                    <app-input 
+                        (valueChange)="logDate(in4.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'" 
+                        [(value)]="textValue"
+                        #in4
+                    />
+                </div>
+            </div>                     
+        </div>
+        <div class="add-item">
+            <div class="input-group input-group-1">
+                <label class="text-muted" for="app-input-1">Item Name</label>
+                <app-input 
+                    (valueChange)="logDate(in1.value)" 
+                    [classList]="['input','input-text']" 
+                    [useType]="'text'"
+                    [(value)]="textValue"
+                    #in1
+                />
+            </div>
+            <div class="input-group input-group-2">
+                <label class="text-muted" for="app-input-2">Qty.</label>
+                <app-input 
+                    (valueChange)="logDate(in2.value)" 
+                    [classList]="['input','input-text']" 
+                    [useType]="'text'"
+                    [(value)]="textValue"
+                    #in2
+                />
+            </div>
+            <div class="input-group input-group-3">
+                <label class="text-muted" for="app-input-3">Total</label>
+                <app-input 
+                    (valueChange)="logDate(in3.value)" 
+                    [classList]="['input','input-text']" 
+                    [useType]="'text'"
+                    [(value)]="textValue"
+                    #in3
+                />
+            </div>
+            <div class="input-group input-group-4">
+                <label class="text-muted" for="app-input-4">City</label>
+                <span class="total-price">156.00</span>
+            </div>
+            <mat-icon fontIcon="home"></mat-icon>
+        </div>
+    </div>
+</div>

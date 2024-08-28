@@ -1,0 +1,115 @@
+.container-fluid{
+    display: flex;
+    flex-direction: column;
+    margin: 0 1.5rem;
+    .form-container{
+        .input-group{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+        }
+        .bill-from{
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto auto auto;
+                gap: 10px; 
+                grid-template-areas: 
+                    "group1 group1"
+                    "group2 group3"
+                    "group4 group4"; 
+            }
+            
+            
+            .input-group-1 {
+                grid-area: group1; 
+            }
+            
+            .input-group-2 {
+                grid-area: group2;
+            }
+            
+            .input-group-3 {
+                grid-area: group3;
+            }
+            
+            .input-group-4 {
+                grid-area: group4;
+            }
+             
+        }
+        .bill-to{
+            .bill-to-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(8, 1fr);
+                gap: 10px; 
+                grid-template-areas: 
+                    "group1 group1"
+                    "group2 group2"
+                    "group3 group3" 
+                    "group4 group5" 
+                    "group6 group6" 
+                    "group7 group7" 
+                    "group8 group8" 
+                    "group9 group9";
+            }
+            
+            .input-group-1 {
+                grid-area: group1; 
+            }
+            
+            .input-group-2 {
+                grid-area: group2;
+            }
+            
+            .input-group-3 {
+                grid-area: group3;
+            }
+            
+            .input-group-4 {
+                grid-area: group4;
+            }
+            .input-group-5 {
+                grid-area: group5;
+            }
+            .input-group-6 {
+                grid-area: group6;
+            }
+            .input-group-7 {
+                grid-area: group7;
+            }
+            .input-group-8 {
+                grid-area: group4;
+            }
+            .input-group-9 {
+                grid-area: group8;
+            }
+        }
+        .add-item{
+            display: grid;
+            grid-template-columns: 10% 40% 33% 10%;
+            grid-template-rows: auto auto;
+                gap: 10px; 
+                grid-template-areas: 
+                    "group1 group1 group1 group1"
+                    "group2 group3 group4 group5";
+
+                    .input-group-1 {
+                        grid-area: group1; 
+                    }
+                    
+                    .input-group-2 {
+                        grid-area: group2;
+                    }
+                    
+                    .input-group-3 {
+                        grid-area: group3;
+                    }
+                    
+                    .input-group-4 {
+                        grid-area: group4;
+                    }
+        }
+    }
+}
