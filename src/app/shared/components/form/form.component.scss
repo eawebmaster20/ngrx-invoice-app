@@ -88,28 +88,28 @@
         }
         .add-item{
             display: grid;
-            grid-template-columns: 10% 40% 33% 10%;
+            grid-template-columns: 10% 40% 40% minmax(calc(10% - 30px), 1fr);
             grid-template-rows: auto auto;
-                gap: 10px; 
-                grid-template-areas: 
-                    "group1 group1 group1 group1"
-                    "group2 group3 group4 group5";
+            gap: 10px;
+            grid-template-areas:
+                "group1 group1 group1 group1"
+                "group2 group3 group4 group5";
 
-                    .input-group-1 {
-                        grid-area: group1; 
-                    }
-                    
-                    .input-group-2 {
-                        grid-area: group2;
-                    }
-                    
-                    .input-group-3 {
-                        grid-area: group3;
-                    }
-                    
-                    .input-group-4 {
-                        grid-area: group4;
-                    }
+            .input-group-1 {
+                grid-area: group1; 
+            }
+            
+            .input-group-2 {
+                grid-area: group2;
+            }
+            
+            .input-group-3 {
+                grid-area: group3;
+            }
+            
+            .input-group-4 {
+                grid-area: group4;
+            }
         }
     }
 }
