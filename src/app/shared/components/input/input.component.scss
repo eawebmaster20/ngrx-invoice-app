@@ -1,6 +1,6 @@
 .input{
     height: 48px;
-    width: 240px;
+    width: 100%;
     border-radius: 0.25rem;
     font-weight: 600;
     padding: 0;
@@ -17,7 +17,7 @@
     // border: 1px solid var(--blue-2);
     position: relative;
     display: flex;
-    width: fit-content;
+    // width: fit-content;
     align-items: center;
     color: var(--dark-6);
     cursor: pointer;
@@ -84,7 +84,6 @@
 }
 .date-picker-container{
     position: relative;
-    width: 240px;
     cursor: pointer;
     .date-icon{
         position: absolute;

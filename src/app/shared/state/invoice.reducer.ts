@@ -10,6 +10,9 @@ export const invoiceReducer = createReducer(
   on(InvoiceActions.addInvoice, (state, { invoice }) =>
     invoiceAdapter.addOne(invoice, state)
   ),
+  on(InvoiceActions.deleteInvoice, (state,  { id }) =>
+    invoiceAdapter.removeOne(id, state)
+  ),
   on(InvoiceActions.updateInvoice, (state, { update }) =>
     invoiceAdapter.updateOne(update, state)
   ),
