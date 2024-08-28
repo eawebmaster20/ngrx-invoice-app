@@ -31,14 +31,14 @@
         </div>
     </div>
     <div class="table-container">
-        @for(invoice of (invoices | async )| filter: statusFilters;track invoice)
+        @for(invoice of invoices | async | filter: statusFilters;track invoice)
         {<div class="invoice-card">
-            <h3 class="id h3-mini"><span>#</span>RT3080</h3>
-            <div class="date">
+            <h3 class="id h3-mini"><span class="text-muted">#</span>RT3080</h3>
+            <div class="date text-muted">
                 <span>Due</span>
                 <p>19 Aug 2022</p>
             </div>
-            <h3 class="h3-mini name">Jensen Huang</h3>
+            <h3 class="h3-mini name text-muted">Jensen Huang</h3>
             <h3 class="amount">£ 1,800.90</h3>
             <button (click)="goToDetail(invoice.id)" class="card-btn btn">
                 <span>.</span>

@@ -19,7 +19,8 @@ main{
         grid-area: top-left;
     }
     .date{
-        padding-left: 20px;
+        display: flex;
+        // padding-left: 20px;
         height: 40px;
         justify-self: start;
         grid-area: bot-left;
@@ -30,7 +31,8 @@ main{
         grid-area: top-right;
     }
     .amount{
-        padding-left: 20px;
+        // padding-left: 20px;
+        padding-top:30px;
         height: 40px;
         justify-self: start;
         grid-area: bot-left;
@@ -38,6 +40,7 @@ main{
     .card-btn{
         border-radius: 6px;   
         width: 104px;
+        color: #33D69F;
         grid-area: bot-right;
     }
 }
