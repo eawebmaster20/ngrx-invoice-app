@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     private apiService:ApiService,
     private store:Store,
   ) {
-    // this.store.dispatch(fetchInvoices())
+    this.store.dispatch(fetchInvoices())
   }
   callAction(k: string) {
     console.log('Button clicked in the child component');
