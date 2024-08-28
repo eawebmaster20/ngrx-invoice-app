@@ -24,6 +24,11 @@ export class HomePageComponent {
     { value: 'option2', label: 'Option 2' , seleted:false},
     { value: 'option3', label: 'Option 3' , seleted:false},
   ];
+  statusFilters = {
+    paid: false,
+    pending: false,
+    draft: false,
+  };
   invoices: Observable<Invoice[]> = this.store.select(selectAllInvoices);
   theme: Observable<any> = this.store.select(selectTheme);
   constructor(public store:Store<{invoices:InvoiceState}>, private router:Router){

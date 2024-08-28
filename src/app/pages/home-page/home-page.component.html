@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="table-container">
-        @for(invoice of invoices | async;track invoice)
+        @for(invoice of (invoices | async )| filter: statusFilters;track invoice)
         {<div class="invoice-card">
             <h3 class="id h3-mini"><span>#</span>RT3080</h3>
             <div class="date">
