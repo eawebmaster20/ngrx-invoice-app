@@ -3,7 +3,7 @@
     <div class="form-container">
         <h1>New Invoice</h1>
         <div class="bill-from">
-            <p>Bill Form</p>
+            <h3 class="part-title h3-mini">Bill Form</h3>
             <div class="grid-container">
                 <div class="input-group input-group-1">
                     <label class="text-muted" for="app-input-1">Street Address</label>
@@ -48,7 +48,7 @@
             </div>                     
         </div>
         <div class="bill-to">
-            <p>Bill To</p>
+            <h3 class="part-title h3-mini">Bill To</h3>
             <div class="bill-to-container">
                 <div class="input-group input-group-1">
                     <label class="text-muted" for="app-input-1">Client's Name</label>
@@ -143,43 +143,46 @@
                 </div>
             </div>                     
         </div>
-        <div class="add-item">
-            <div class="input-group input-group-1">
-                <label class="text-muted" for="app-input-1">Item Name</label>
-                <app-input 
-                    (valueChange)="logDate(in1.value)" 
-                    [classList]="['input','input-text']" 
-                    [useType]="'text'"
-                    [(value)]="textValue"
-                    #in1
-                />
+        <div class="items-form">
+            <h2 class="text-muted title">Item List</h2>
+            <div class="add-item">
+                <div class="input-group input-group-1">
+                    <label class="text-muted" for="app-input-1">Item Name</label>
+                    <app-input 
+                        (valueChange)="logDate(in1.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in1
+                    />
+                </div>
+                <div class="input-group input-group-2">
+                    <label class="text-muted" for="app-input-2">Qty.</label>
+                    <app-input 
+                        (valueChange)="logDate(in2.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in2
+                    />
+                </div>
+                <div class="input-group input-group-3">
+                    <label class="text-muted" for="app-input-3">Total</label>
+                    <app-input 
+                        (valueChange)="logDate(in3.value)" 
+                        [classList]="['input','input-text']" 
+                        [useType]="'text'"
+                        [(value)]="textValue"
+                        #in3
+                    />
+                </div>
+                <div class="input-group input-group-4">
+                    <label class="text-muted" for="app-input-4">City</label>
+                    <span class="total-price">156.00</span>
+                </div>
+                <mat-icon fontIcon="home"></mat-icon>
             </div>
-            <div class="input-group input-group-2">
-                <label class="text-muted" for="app-input-2">Qty.</label>
-                <app-input 
-                    (valueChange)="logDate(in2.value)" 
-                    [classList]="['input','input-text']" 
-                    [useType]="'text'"
-                    [(value)]="textValue"
-                    #in2
-                />
-            </div>
-            <div class="input-group input-group-3">
-                <label class="text-muted" for="app-input-3">Total</label>
-                <app-input 
-                    (valueChange)="logDate(in3.value)" 
-                    [classList]="['input','input-text']" 
-                    [useType]="'text'"
-                    [(value)]="textValue"
-                    #in3
-                />
-            </div>
-            <div class="input-group input-group-4">
-                <label class="text-muted" for="app-input-4">City</label>
-                <span class="total-price">156.00</span>
-            </div>
-            <mat-icon fontIcon="home"></mat-icon>
         </div>
-        <button mat-flat-button>Basic</button>
+        <button class="btn-add-new-invoice" mat-flat-button>Add New Invoice</button>
     </div>
 </div>

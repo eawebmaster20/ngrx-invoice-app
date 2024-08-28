@@ -9,6 +9,11 @@
             flex-direction: column;
         }
         .bill-from{
+            margin-bottom: 40px;
+            .part-title{
+                color:var(--blue-5);
+                margin-bottom: 1.5rem;
+            }
             .grid-container {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
@@ -39,10 +44,15 @@
              
         }
         .bill-to{
+            margin-bottom: 40px;
+            .part-title{
+                color:var(--blue-5);
+                margin-bottom: 1.5rem;
+            }
             .bill-to-container {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(8, 1fr);
+                // grid-template-rows: repeat(8, 1fr);
                 gap: 10px; 
                 grid-template-areas: 
                     "group1 group1"
@@ -86,30 +96,45 @@
                 grid-area: group8;
             }
         }
-        .add-item{
-            display: grid;
-            grid-template-columns: 10% 40% 40% minmax(calc(10% - 30px), 1fr);
-            grid-template-rows: auto auto;
-            gap: 10px;
-            grid-template-areas:
-                "group1 group1 group1 group1"
-                "group2 group3 group4 group5";
-
-            .input-group-1 {
-                grid-area: group1; 
+        .items-form{
+            .title{
+                margin: 22px 0 1.5rem 0;
             }
-            
-            .input-group-2 {
-                grid-area: group2;
+            .add-item{
+                display: grid;
+                grid-template-columns: 10% 40% 30% minmax(calc(10% - 30px), 1fr);
+                grid-template-rows: auto auto;
+                gap: 10px;
+                align-items: center;
+                margin-bottom: 3rem;
+                grid-template-areas:
+                    "group1 group1 group1 group1"
+                    "group2 group3 group4 group5";
+    
+                .input-group-1 {
+                    grid-area: group1; 
+                }
+                
+                .input-group-2 {
+                    grid-area: group2;
+                }
+                
+                .input-group-3 {
+                    grid-area: group3;
+                }
+                
+                .input-group-4 {
+                    grid-area: group4;
+                }
             }
-            
-            .input-group-3 {
-                grid-area: group3;
-            }
-            
-            .input-group-4 {
-                grid-area: group4;
-            }
+        }
+        .btn-add-new-invoice{
+            height: 48px;
+            background: var(--blue-1);
+            color: var(--blue-3);
+            margin: 0 0 3rem 0;
+            width: 100%;
+            border-radius: 24px;
         }
     }
 }
