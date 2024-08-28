@@ -22,6 +22,9 @@
     --danger-1:#FF9797;
     --danger-2:#EC5757;
 }
+.text-muted{
+    color: var(--dark-1);
+}
 .body-1{
     font-size: 12px;
     line-height: 15px;
@@ -65,7 +68,7 @@ h3{
     font-size: 12px;
     letter-spacing: -0.25px;
     line-height: 1px;
-    padding: 0 1.5rem;
+    margin-left: auto;
     font-weight: 600;
     border: none;
     border-radius: 24px;
