@@ -5,10 +5,10 @@ export const selectInvoiceState = createFeatureSelector<InvoiceState>('invoices'
 
 const { selectIds, selectEntities, selectAll, selectTotal } = invoiceAdapter.getSelectors(selectInvoiceState);
 
-export const selectAllInvoicesArray = createSelector(
-  selectInvoiceState,
-  (state: InvoiceState) => state.invoices
-);
+// export const selectAllInvoicesArray = createSelector(
+//   selectInvoiceState,
+//   (state: InvoiceState) => state.invoices
+// );
 
 export const selectAllInvoices = selectAll;
 

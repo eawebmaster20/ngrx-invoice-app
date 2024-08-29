@@ -4,7 +4,7 @@ import { Invoice } from '../models/store.types';
 export interface InvoiceState extends EntityState<Invoice> {
   selectedInvoiceId: string | null;
   theme: string;
-  invoices: Invoice[];
+  // invoices: Invoice[];
 }
 
 export const invoiceAdapter: EntityAdapter<Invoice> = createEntityAdapter<Invoice>();
@@ -12,5 +12,5 @@ export const invoiceAdapter: EntityAdapter<Invoice> = createEntityAdapter<Invoic
 export const initialInvoiceState: InvoiceState = invoiceAdapter.getInitialState({
   selectedInvoiceId: 'RG0314',
   theme: 'light', 
-  invoices: []
+  // invoices: []
 });
