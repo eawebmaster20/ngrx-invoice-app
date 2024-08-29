@@ -22,6 +22,12 @@
     --danger-1:#FF9797;
     --danger-2:#EC5757;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .text-muted{
     color: var(--dark-1);
 }
