@@ -2,27 +2,35 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { InputComponent } from '../input/input.component';
 import { Store } from '@ngrx/store';
-import { Invoice } from '../../models/store.types';
+import { Invoice, Item } from '../../models/store.types';
 import { addInvoice, deleteInvoice, setTheme, updateInvoice } from '../../state/invoice.action';
 import { InvoiceState } from '../../state/invoice.entity';
 import { Update } from '@ngrx/entity';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { StoreService } from '../../services/storeService/store.service';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ButtonComponent,InputComponent, MatButtonModule, MatIconModule],
+  imports: [
+    ButtonComponent,
+    InputComponent, 
+    MatButtonModule, 
+    MatIconModule,
+    FormsModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    ReactiveFormsModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
 export class FormComponent {
   textValue: string = '';
-  options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
-  ];
+
   testData:Invoice = {
     id: "ALLO NKOAA",
     createdAt: "2021-08-21",
@@ -96,30 +104,30 @@ export class FormComponent {
     ],
     total: 556.00
   }
-  constructor(public store:Store<{invoices:InvoiceState}>){
+  constructor(public store:Store<{invoices:InvoiceState}>,public storeService: StoreService){
     this.store.select('invoices').subscribe(state => {
       console.log(state);
     })
-    setTimeout(() => {
-      this.store.dispatch(addInvoice({invoice:this.testData}))
-    }, 2000);
-    setTimeout(() => {
-      this.store.dispatch(deleteInvoice({id:"XM9141"}))
-    }, 4000);
-    setTimeout(() => {
-      const update: Update<Invoice> = {
-        id:"TY9141",
-        changes:this.testData1
-      };
-      this.store.dispatch(updateInvoice({update}));
-    }, 8000);
-    setTimeout(() => {
-      const update: Update<Invoice> = {
-        id:"TY9141",
-        changes:this.testData1
-      };
-      this.store.dispatch(setTheme({theme:"dark"}));
-    }, 12000);
+    // setTimeout(() => {
+    //   this.store.dispatch(addInvoice({invoice:this.testData}))
+    // }, 2000);
+    // setTimeout(() => {
+    //   this.store.dispatch(deleteInvoice({id:"XM9141"}))
+    // }, 4000);
+    // setTimeout(() => {
+    //   const update: Update<Invoice> = {
+    //     id:"TY9141",
+    //     changes:this.testData1
+    //   };
+    //   this.store.dispatch(updateInvoice({update}));
+    // }, 8000);
+    // setTimeout(() => {
+    //   const update: Update<Invoice> = {
+    //     id:"TY9141",
+    //     changes:this.testData1
+    //   };
+    //   this.store.dispatch(setTheme({theme:"dark"}));
+    // }, 12000);
     
   }
   callAction(k: string) {
@@ -135,4 +143,24 @@ export class FormComponent {
   logger(){
     console.log(this.textValue);
   }
+  addItemToItemList(){
+    let emptyItem:Item = {
+      name: '',
+      quantity: 0,
+      price: 0,
+      total: 0
+    }
+    this.storeService.newInvoice.items.push(emptyItem);
+  }
+  removeItemFromItemList(index:number){
+    this.storeService.newInvoice.items.splice(index, 1);
+  }
+  setPaymentPlan(paymentPlan:number){
+    this.storeService.newInvoice.paymentTerms = paymentPlan;
+  }
+  addNewInvoiceToStore(status:string){
+    this.storeService.newInvoice.id = "NEWi185"
+    this.store.dispatch(addInvoice({invoice: this.storeService.newInvoice}))
+  }
+
 }
