@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import * as InvoiceActions from './invoice.action';
 import { Invoice } from '../models/store.types';
 import { StoreService } from '../services/storeService/store.service';
@@ -19,20 +19,49 @@ export class InvoiceEffects {
   fetchInvoices$ = createEffect(() =>
     this.actions.pipe(
       ofType(InvoiceActions.fetchInvoices),
-      mergeMap(() =>
-        this.storeService.fetchInvoices().pipe(
-          map((invoices: Invoice[]) =>  {
-                console.log(invoices)
+      mergeMap(() => {
+        const localStorageInvoices = localStorage.getItem('invoices');
+
+        if (localStorageInvoices) {
+          const invoices: Invoice[] = JSON.parse(localStorageInvoices);
+          return of(InvoiceActions.fetchInvoicesSuccess({ invoices }));
+        } else {
+          return this.storeService.fetchInvoices().pipe(
+            tap((invoices: Invoice[]) => {
+              localStorage.setItem('invoices', JSON.stringify(invoices));
+            }),
+            map((invoices: Invoice[]) =>
+            {
+              localStorage.setItem('invoices', JSON.stringify(invoices));
               return InvoiceActions.fetchInvoicesSuccess({ invoices })
-          }
-          ),
-          catchError((error) =>
-            of(InvoiceActions.fetchInvoicesFailure({ error }))
-          )
-        )
-      )
+            }
+            ),
+            catchError((error) =>
+              of(InvoiceActions.fetchInvoicesFailure({ error }))
+            )
+          );
+        }
+      })
     )
   );
+
+  // fetchInvoices$ = createEffect(() =>
+  //   this.actions.pipe(
+  //     ofType(InvoiceActions.fetchInvoices),
+  //     mergeMap(() =>
+  //       this.storeService.fetchInvoices().pipe(
+  //         map((invoices: Invoice[]) =>  {
+  //               console.log(invoices)
+  //             return InvoiceActions.fetchInvoicesSuccess({ invoices })
+  //         }
+  //         ),
+  //         catchError((error) =>
+  //           of(InvoiceActions.fetchInvoicesFailure({ error }))
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
 
 //   addInvoice$ = createEffect(() =>
 //     this.actions.pipe(
