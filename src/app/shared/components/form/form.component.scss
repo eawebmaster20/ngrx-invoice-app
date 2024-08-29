@@ -57,12 +57,13 @@
                 grid-template-areas: 
                     "group1 group1"
                     "group2 group2"
-                    "group3 group3" 
-                    "group4 group5" 
-                    "group6 group6" 
-                    "group7 group7" 
-                    "group8 group8" 
-                    "group9 group9";
+                    "group3 group3"
+                    "group4 group5"
+                    "group6 group6"
+                    "group7 group7"
+                    "group8 group8"
+                    "group9 group9"
+                    
             }
             
             .input-group-1 {
@@ -90,10 +91,10 @@
                 grid-area: group7;
             }
             .input-group-8 {
-                grid-area: group4;
+                grid-area: group8;
             }
             .input-group-9 {
-                grid-area: group8;
+                grid-area: group9;
             }
         }
         .items-form{
@@ -117,6 +118,10 @@
                 
                 .input-group-2 {
                     grid-area: group2;
+                    input{
+                        padding: 0;
+                        text-align: center;
+                    }
                 }
                 
                 .input-group-3 {
@@ -125,6 +130,9 @@
                 
                 .input-group-4 {
                     grid-area: group4;
+                }
+                .del-btn{
+                    color: var(--dark-1);
                 }
             }
         }
@@ -136,5 +144,163 @@
             width: 100%;
             border-radius: 24px;
         }
+        .form-action{
+            display: flex;
+            justify-content: end;
+            gap: 0.5rem;
+            .btn-action-cancel, .btn-action-save{
+                height: 48px;
+                width: auto !important;
+                background-color: var(--blue-1);
+                color: var(--blue-3);
+                margin: 0 0 3rem 0;
+                border-radius: 24px;
+            }
+            .btn-action-save{
+                background-color: var(--blue-5);
+                color: #fff;
+                &:hover{
+                    background-color: var(--blue-4);
+                }
+            }
+        }
+    }
+}
+
+.input{
+    height: 48px;
+    width: 100%;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    padding: 0;
+    border: 1px solid var(--blue-2);
+    box-sizing: border-box;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+.input-text{
+    border: 1px solid var(--blue-2);
+
+    &:focus{
+        border-color: var(--blue-4);
+        outline: var(--blue-4);
+    }
+}
+.input-select{
+    // border: 1px solid var(--blue-2);
+    position: relative;
+    display: flex;
+    // width: fit-content;
+    align-items: center;
+    color: var(--dark-6);
+    cursor: pointer;
+    
+    &:hover{
+        .input-select-options{
+            display: block !important;
+            position: absolute;
+            top: 100%;
+            width: 240px;
+            left: 0;
+            background-color: white;
+            border-radius: 0.25rem;
+            border: 1px solid var(--blue-2);
+            box-shadow: 0 9px 12px 4px var(--blue-2);
+            z-index: 100;
+            padding: 0;
+            margin: 0;
+    
+            li{
+                list-style: none;
+                height: 48px;
+                border-top: 1px solid var(--blue-2);
+                display: flex;
+                align-items: center;
+                padding: 0 1rem 0 1.25rem;
+    
+                &:first-child{
+                    border-top: none
+                }
+                
+                &:hover{
+                    color: var(--blue-3);
+                    cursor: pointer;
+                }
+            }
+        }
+        
+    }
+    .selected-value{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .input-select-options{
+        display: none;
+    }
+
+    
+}
+.btn{
+    font-size: 12px;
+    letter-spacing: -0.25px;
+    line-height: 1px;
+    margin-left: auto;
+    font-weight: 600;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    height: 48px;
+}
+
+
+
+@media only screen and (min-width: 768px){
+    .form-container{
+        width: 616px !important;
+        .grid-container {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 16px !important; 
+            grid-template-areas: 
+                "group1 group1 group1"
+                "group2 group3 group4" !important;
+        }
+    
+        .bill-to-container {
+            grid-template-columns: repeat(12, 1fr) !important;
+            gap: 16px !important; 
+            grid-template-areas: 
+            "group1 group1 group1 group1 group1 group1 group1 group1 group1 group1 group1 group1"
+            "group2 group2 group2 group2 group2 group2 group2 group2 group2 group2 group2 group2"
+            "group3 group3 group3 group3 group3 group3 group3 group3 group3 group3 group3 group3"
+            "group4 group4 group4 group4 group5 group5 group5 group5 group6 group6 group6 group6"
+            "group7 group7 group7 group7 group7 group7 group8 group8 group8 group8 group8 group8"
+            "group9 group9 group9 group9 group9 group9 group9 group9 group9 group9 group9 group9" !important;
+        }
+        .add-item{
+            grid-template-columns: 1fr 46px 0.5fr 0.5fr 46px !important;
+            gap: 10px !important;
+            margin-bottom: 1rem !important;
+            grid-template-areas:
+                "group1 group2 group3 group4 group5" !important;
+    
+            .input-group-1 {
+                grid-area: group1; 
+            }
+            
+            .input-group-2 {
+                grid-area: group2;
+            }
+            
+            .input-group-3 {
+                grid-area: group3;
+            }
+            
+            .input-group-4 {
+                grid-area: group4;
+            }
+        }
+
     }
 }
