@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <span class="back-btn">back</span>
-    <div class="form-container">
+    <div class="form-container" [formGroup]="storeService.addInvoiceForm">
         <h1>New Invoice</h1>
         <div class="bill-from">
             <h3 class="part-title h3-mini">Bill Form</h3>
@@ -11,10 +11,10 @@
                     Class="input input-text"
                     [(ngModel)]="storeService.newInvoice.senderAddress.street"
                     type="text" 
-                    [formControl]="storeService.senderStreet"
+                    formControlName="senderStreet"
                     >
-                    @if (storeService.senderStreet.hasError('required')) {
-                      <mat-error>Please enter a valid email address</mat-error>
+                    @if (storeService.senderStreet.hasError('required') && storeService.submitted) {
+                      <mat-error>Street address is required!</mat-error>
                     }
                 </div>
                 <div class="input-group input-group-2">
@@ -23,10 +23,10 @@
                         Class="input input-text"
                         type="text"
                         [(ngModel)]="storeService.newInvoice.senderAddress.city"
-                        [formControl]="storeService.senderCity"
+                        formControlName="senderCity"
                     >
-                    @if (storeService.senderCity.hasError('required')) {
-                      <mat-error>Please enter a valid email address</mat-error>
+                    @if (storeService.senderCity.hasError('required') && storeService.submitted) {
+                      <mat-error>required!</mat-error>
                     }
                 </div>
                 <div class="input-group input-group-3">
@@ -35,10 +35,10 @@
                         Class="input input-text"
                         type="text"
                         [(ngModel)]="storeService.newInvoice.senderAddress.country"
-                        [formControl]="storeService.senderCountry"
+                        formControlName="senderCountry"
                     >
-                    @if (storeService.senderCountry.hasError('required')) {
-                      <mat-error>Please enter a valid email address</mat-error>
+                    @if (storeService.senderCountry.hasError('required') && storeService.submitted) {
+                      <mat-error>Required!</mat-error>
                     }
                 </div>
                 <div class="input-group input-group-4">
@@ -47,10 +47,10 @@
                         Class="input input-text"
                         type="text"
                         [(ngModel)]="storeService.newInvoice.senderAddress.postCode"
-                        [formControl]="storeService.senderPostCode"
+                        formControlName="senderPostCode"
                     >
-                    @if (storeService.senderPostCode.hasError('required')) {
-                      <mat-error>Please enter a valid email address</mat-error>
+                    @if (storeService.senderPostCode.hasError('required') && storeService.submitted) {
+                      <mat-error>Required</mat-error>
                     }
                 </div>
             </div>                     
@@ -64,10 +64,10 @@
                         Class="input input-text"
                         type="text"
                         [(ngModel)]="storeService.newInvoice.clientName"
-                        [formControl]="storeService.clientName"
+                        formControlName="clientName"
                     >
-                    @if (storeService.clientName.hasError('required')) {
-                      <mat-error>Please enter a valid email address</mat-error>
+                    @if (storeService.clientName.hasError('required') && storeService.submitted) {
+                      <mat-error>Required</mat-error>
                     }
                 </div>
                 <div class="input-group input-group-2">
@@ -76,9 +76,12 @@
                         Class="input input-text"
                         type="text"
                         [(ngModel)]="storeService.newInvoice.clientEmail"
-                        [formControl]="storeService.clientEmail"
+                        formControlName="clientEmail"
                     >
-                    @if (storeService.clientEmail.hasError('required') && storeService.clientEmail.hasError('email')) {
+                    @if (
+                    storeService.clientEmail.hasError('required') 
+                    && storeService.clientEmail.hasError('email') 
+                    && storeService.submitted) {
                       <mat-error>Please enter a valid email address</mat-error>
                     }
                 </div>
@@ -88,10 +91,10 @@
                         Class="input input-text"
                         type="text"
                         [(ngModel)]="storeService.newInvoice.clientAddress.street"
-                        [formControl]="storeService.clientStreet"
+                        formControlName="clientStreet"
                     >
-                    @if (storeService.clientStreet.hasError('required')) {
-                      <mat-error>Please enter a valid email address</mat-error>
+                    @if (storeService.clientStreet.hasError('required') && storeService.submitted) {
+                      <mat-error>Required</mat-error>
                     }
                 </div>
                 <div class="input-group input-group-4">
@@ -100,10 +103,10 @@
                         Class="input input-text"
                         type="text"
                         [(ngModel)]="storeService.newInvoice.clientAddress.city"
-                        [formControl]="storeService.clientCity"
+                        formControlName="clientCity"
                     >
-                    @if (storeService.clientCity.hasError('required')) {
-                      <mat-error>Please enter a valid email address</mat-error>
+                    @if (storeService.clientCity.hasError('required') && storeService.submitted) {
+                      <mat-error>Required</mat-error>
                     }
                 </div>
                 <div class="input-group input-group-5">
@@ -112,10 +115,10 @@
                         Class="input input-text"
                         type="text"
                         [(ngModel)]="storeService.newInvoice.clientAddress.postCode"
-                        [formControl]="storeService.clientPostCode"
+                        formControlName="clientPostCode"
                     >
-                    @if (storeService.clientPostCode.hasError('required')) {
-                      <mat-error>Please enter a valid email address</mat-error>
+                    @if (storeService.clientPostCode.hasError('required') && storeService.submitted) {
+                      <mat-error>Required!</mat-error>
                     }
                 </div>
                 <div class="input-group input-group-6">
@@ -124,10 +127,10 @@
                         Class="input input-text"
                         type="text"
                         [(ngModel)]="storeService.newInvoice.clientAddress.country" 
-                        [formControl]="storeService.clientCountry"
+                        formControlName="clientCountry"
                     >
-                    @if (storeService.clientCountry.hasError('required')) {
-                      <mat-error>Please enter a valid email address</mat-error>
+                    @if (storeService.clientCountry.hasError('required') && storeService.submitted) {
+                      <mat-error>Required!</mat-error>
                     }
                 </div>
                 <div class="input-group input-group-7">
@@ -152,10 +155,10 @@
                             <img src="assets/icons/carret.svg" alt="" srcset="">
                         </span>
                         <ul  class="input-select-options">
-                            <li (click)="setPaymentPlan(1)"> Net 1 Day</li>
-                            <li (click)="setPaymentPlan(7)">Net 7 Days</li>
-                            <li (click)="setPaymentPlan(14)">Net 14 Days</li>
-                            <li (click)="setPaymentPlan(30)">Net 30 Days</li>
+                            <li (click)="storeService.setPaymentPlan(1)"> Net 1 Day</li>
+                            <li (click)="storeService.setPaymentPlan(7)">Net 7 Days</li>
+                            <li (click)="storeService.setPaymentPlan(14)">Net 14 Days</li>
+                            <li (click)="storeService.setPaymentPlan(30)">Net 30 Days</li>
                         </ul>
                     </div>
                 </div>
@@ -164,10 +167,10 @@
                     <input
                         Class="input input-text"
                         type="text"
-                        [formControl]="storeService.description"
+                        formControlName="description"
                     >
-                    @if (storeService.description.hasError('required')) {
-                      <mat-error>Please enter a valid email address</mat-error>
+                    @if (storeService.description.hasError('required') && storeService.submitted) {
+                      <mat-error>Description is Required</mat-error>
                     }
                 </div>
             </div>                     
@@ -204,16 +207,16 @@
                         <label class="text-muted" for="app-input-4">Total</label>
                         <span [(ngModel)]="item.quantity" class="total-price">{{item.price * item.quantity}}</span>
                     </div>
-                    <button (click)="removeItemFromItemList($index)" mat-icon-button class="del-btn">
+                    <button (click)="storeService.removeItemFromItemList($index)" mat-icon-button class="del-btn">
                         <mat-icon fontIcon="delete"></mat-icon>
                     </button>
                 </div>
             }
         </div>
-        <button (click)="addItemToItemList()" class="btn-add-new-invoice" mat-flat-button>Add New Invoice</button>
+        <button (click)="storeService.addItemToItemList()" class="btn-add-new-invoice" mat-flat-button>Add New Invoice</button>
         <div class="form-action">
-            <button (click)="addNewInvoiceToStore('draft')" class="btn-action-cancel" mat-flat-button>Cancel</button>
-            <button (click)="addNewInvoiceToStore('pending')" class="btn-action-save" mat-flat-button>Save Changes</button>
+            <button (click)="storeService.addNewInvoiceToStore('draft')" class="btn-action-cancel" mat-flat-button>Cancel</button>
+            <button (click)="storeService.addNewInvoiceToStore('pending')" class="btn-action-save" mat-flat-button>Save Changes</button>
         </div>
     </div>
 </div>

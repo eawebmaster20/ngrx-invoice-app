@@ -130,37 +130,10 @@ export class FormComponent {
     // }, 12000);
     
   }
-  callAction(k: string) {
-    console.log('Button clicked in the child component');
-  }
 
-  buttonClick(event:any) {
-    console.log('Button clicked in the parent component', event);
-  }
   logDate(event:any) {
     console.log(event);
   }
-  logger(){
-    console.log(this.textValue);
-  }
-  addItemToItemList(){
-    let emptyItem:Item = {
-      name: '',
-      quantity: 0,
-      price: 0,
-      total: 0
-    }
-    this.storeService.newInvoice.items.push(emptyItem);
-  }
-  removeItemFromItemList(index:number){
-    this.storeService.newInvoice.items.splice(index, 1);
-  }
-  setPaymentPlan(paymentPlan:number){
-    this.storeService.newInvoice.paymentTerms = paymentPlan;
-  }
-  addNewInvoiceToStore(status:string){
-    this.storeService.newInvoice.id = "NEWi185"
-    this.store.dispatch(addInvoice({invoice: this.storeService.newInvoice}))
-  }
+
 
 }
