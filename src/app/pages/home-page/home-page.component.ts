@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { fetchInvoices } from '../../shared/state/invoice.action';
 import { InvoiceState } from '../../shared/state/invoice.entity';
 import { Invoice } from '../../shared/models/store.types';
-import { selectAllInvoices, selectAllInvoicesArray, selectTheme } from '../../shared/state/invoice.selectors';
+import { selectAllInvoices, selectTheme } from '../../shared/state/invoice.selectors';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FilterPipe } from '../../shared/pipes/filter/filter.pipe';
