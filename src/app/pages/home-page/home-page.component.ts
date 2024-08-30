@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { InputComponent } from '../../shared/components/input/input.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -14,7 +13,7 @@ import { FilterPipe } from '../../shared/pipes/filter/filter.pipe';
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [InputComponent, ButtonComponent, CommonModule, FilterPipe],
+  imports: [ButtonComponent, CommonModule, FilterPipe],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
