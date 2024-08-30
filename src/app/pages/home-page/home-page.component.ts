@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { InputComponent } from '../../shared/components/input/input.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -8,21 +7,19 @@ import { InvoiceState } from '../../shared/state/invoice.entity';
 import { Invoice } from '../../shared/models/store.types';
 import { selectAllInvoices, selectTheme } from '../../shared/state/invoice.selectors';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FilterPipe } from '../../shared/pipes/filter/filter.pipe';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [InputComponent, ButtonComponent, CommonModule, FilterPipe],
+  imports: [ButtonComponent, CommonModule, FilterPipe,RouterLink],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent {
   filterOptions = [
-    { value: 'option1', label: 'Option 1' , seleted:false},
-    { value: 'option2', label: 'Option 2' , seleted:false},
-    { value: 'option3', label: 'Option 3' , seleted:false},
+    "Draft","Pending","Paid"
   ];
   statusFilters = {
     paid: false,
@@ -41,6 +38,10 @@ export class HomePageComponent {
 
   buttonClick(event:any) {
     console.log('Button clicked in the parent component', event);
+  }
+  onValueChange(event:any) {
+    console.log(event);
+    document.getElementById("paymentTerms")!.innerText =event
   }
   goToDetail(invoiceId: string) {
     console.log('Button clicked in the parent component', invoiceId);

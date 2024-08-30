@@ -1,5 +1,8 @@
-<div class="container-fluid">
-    <span class="back-btn">back</span>
+<div class="container-fluid" [formGroup]="storeService.addInvoiceForm">
+    <span class="back-btn" routerLink="/">
+        <img src="assets/images/icon-arrow-left.svg" alt="" srcset="">    
+        back
+    </span>
     <div class="form-container" [formGroup]="storeService.addInvoiceForm">
         <h1>New Invoice</h1>
         <div class="bill-from">
@@ -9,11 +12,10 @@
                     <label class="text-muted" for="app-input-1">Street Address</label>
                     <input
                     Class="input input-text"
-                    [(ngModel)]="storeService.newInvoice.senderAddress.street"
                     type="text" 
                     formControlName="senderStreet"
                     >
-                    @if (storeService.senderStreet.hasError('required') && storeService.submitted) {
+                    @if (storeService.addInvoiceForm.get('senderStreet')?.hasError('required') && storeService.submitted) {
                       <mat-error>Street address is required!</mat-error>
                     }
                 </div>
@@ -22,10 +24,9 @@
                     <input
                         Class="input input-text"
                         type="text"
-                        [(ngModel)]="storeService.newInvoice.senderAddress.city"
                         formControlName="senderCity"
                     >
-                    @if (storeService.senderCity.hasError('required') && storeService.submitted) {
+                    @if (storeService.addInvoiceForm.get('senderStreet')?.hasError('required') && storeService.submitted) {
                       <mat-error>required!</mat-error>
                     }
                 </div>
@@ -34,10 +35,9 @@
                     <input
                         Class="input input-text"
                         type="text"
-                        [(ngModel)]="storeService.newInvoice.senderAddress.country"
                         formControlName="senderCountry"
                     >
-                    @if (storeService.senderCountry.hasError('required') && storeService.submitted) {
+                    @if (storeService.addInvoiceForm.get('senderCountry')?.hasError('required') && storeService.submitted) {
                       <mat-error>Required!</mat-error>
                     }
                 </div>
@@ -46,10 +46,9 @@
                     <input
                         Class="input input-text"
                         type="text"
-                        [(ngModel)]="storeService.newInvoice.senderAddress.postCode"
                         formControlName="senderPostCode"
                     >
-                    @if (storeService.senderPostCode.hasError('required') && storeService.submitted) {
+                    @if (storeService.addInvoiceForm.get('senderPostCode')?.hasError('required') && storeService.submitted) {
                       <mat-error>Required</mat-error>
                     }
                 </div>
@@ -63,10 +62,9 @@
                     <input
                         Class="input input-text"
                         type="text"
-                        [(ngModel)]="storeService.newInvoice.clientName"
                         formControlName="clientName"
                     >
-                    @if (storeService.clientName.hasError('required') && storeService.submitted) {
+                    @if (storeService.addInvoiceForm.get('clientName')?.hasError('required') && storeService.submitted) {
                       <mat-error>Required</mat-error>
                     }
                 </div>
@@ -75,12 +73,11 @@
                     <input
                         Class="input input-text"
                         type="text"
-                        [(ngModel)]="storeService.newInvoice.clientEmail"
                         formControlName="clientEmail"
                     >
                     @if (
-                    storeService.clientEmail.hasError('required') 
-                    && storeService.clientEmail.hasError('email') 
+                    storeService.addInvoiceForm.get('clientEmail')?.hasError('required') 
+                    && storeService.addInvoiceForm.get('clientEmail')?.hasError('email') 
                     && storeService.submitted) {
                       <mat-error>Please enter a valid email address</mat-error>
                     }
@@ -90,10 +87,9 @@
                     <input
                         Class="input input-text"
                         type="text"
-                        [(ngModel)]="storeService.newInvoice.clientAddress.street"
                         formControlName="clientStreet"
                     >
-                    @if (storeService.clientStreet.hasError('required') && storeService.submitted) {
+                    @if (storeService.addInvoiceForm.get('clientStreet')?.hasError('required') && storeService.submitted) {
                       <mat-error>Required</mat-error>
                     }
                 </div>
@@ -102,10 +98,9 @@
                     <input
                         Class="input input-text"
                         type="text"
-                        [(ngModel)]="storeService.newInvoice.clientAddress.city"
                         formControlName="clientCity"
                     >
-                    @if (storeService.clientCity.hasError('required') && storeService.submitted) {
+                    @if (storeService.addInvoiceForm.get('clientCity')?.hasError('required') && storeService.submitted) {
                       <mat-error>Required</mat-error>
                     }
                 </div>
@@ -114,44 +109,47 @@
                     <input
                         Class="input input-text"
                         type="text"
-                        [(ngModel)]="storeService.newInvoice.clientAddress.postCode"
                         formControlName="clientPostCode"
                     >
-                    @if (storeService.clientPostCode.hasError('required') && storeService.submitted) {
+                    @if (storeService.addInvoiceForm.get('clientPostCode')?.hasError('required') && storeService.submitted) {
                       <mat-error>Required!</mat-error>
                     }
                 </div>
                 <div class="input-group input-group-6">
                     <label class="text-muted" for="app-input-4">Country</label>
                     <input
-                        Class="input input-text"
+                        class="input input-text"
                         type="text"
-                        [(ngModel)]="storeService.newInvoice.clientAddress.country" 
                         formControlName="clientCountry"
                     >
-                    @if (storeService.clientCountry.hasError('required') && storeService.submitted) {
+                    @if (storeService.addInvoiceForm.get('clientCountry')?.hasError('required') && storeService.submitted) {
                       <mat-error>Required!</mat-error>
                     }
                 </div>
                 <div class="input-group input-group-7">
                     <label class="text-muted" for="app-input-4">Invoice Date</label>
-                    <app-input 
-                        (valueChange)="logDate(in4.value)" 
-                        [classList]="['input','input-date','input-text']" 
-                        [useType]="'date'"
-                        [(value)]="textValue"
-                        #in4
-                    />
+                    <div (click)="picker.open()" class="date-picker-container">
+                        <input
+                        class="input input-date input-text"
+                        (change)="onValueChange($event)"
+                        type="text"
+                        readonly
+                        [matDatepicker]="picker"
+                        [value]="'hello'"
+                        >
+                        <span class="date-icon">
+                            <img src="assets/icons/date.svg" alt="" srcset="">
+                        </span>
+                    </div>
+                    <mat-datepicker #picker></mat-datepicker>
                 </div>
                 <div class="input-group input-group-8"> 
                     <label class="text-muted" for="">Payment Terms</label>
                     <div 
                     Class="input input-select"
                     >
-                        <span class="selected-value">
-                            Net 
-                            {{storeService.newInvoice.paymentTerms}} 
-                            {{storeService.newInvoice.paymentTerms>1? 'Days':'Day' }}
+                        <span class="selected-value" id="paymentTerms">
+                            Net 1 Day
                             <img src="assets/icons/carret.svg" alt="" srcset="">
                         </span>
                         <ul  class="input-select-options">
@@ -169,22 +167,25 @@
                         type="text"
                         formControlName="description"
                     >
-                    @if (storeService.description.hasError('required') && storeService.submitted) {
+                    @if (storeService.addInvoiceForm.get('description')?.hasError('required') && storeService.submitted) {
                       <mat-error>Description is Required</mat-error>
                     }
                 </div>
             </div>                     
         </div>
-        <div class="items-form">
+        
+          
+        <div class="items-form" formArrayName="items">
             <h2 class="text-muted title">Item List</h2>
-            @for(item of storeService.newInvoice.items; track $index){
-                <div class="add-item">
+            @for(item of storeService.addNewItemToList.controls; track $index){
+                <div class="add-item" [formGroupName]="$index">
                     <div class="input-group input-group-1">
                         <label class="text-muted" for="app-input-1">Item Name</label>
                         <input
-                            [(ngModel)]="item.name"
+                            [id]="'itemname'+$index"
                             Class="input input-text"
                             type="text"
+                            [formControlName]="'name'"
                             >
                     </div>
                     <div class="input-group input-group-2">
@@ -192,7 +193,7 @@
                         <input
                             Class="input input-text"
                             type="number"
-                            [(ngModel)]="item.quantity" 
+                            [formControlName]="'quantity'"
                             >
                     </div>
                     <div class="input-group input-group-3">
@@ -200,12 +201,13 @@
                         <input
                             Class="input input-text"
                             type="Number"
-                            [(ngModel)]="item.price"
+                            [formControlName]="'price'"
                             >
                     </div>
                     <div class="input-group input-group-4">
                         <label class="text-muted" for="app-input-4">Total</label>
-                        <span [(ngModel)]="item.quantity" class="total-price">{{item.price * item.quantity}}</span>
+                        <!-- <span class="total-price">0</span> -->
+                        <span class="total-price">{{ item.value.price * item.value.quantity }}</span>
                     </div>
                     <button (click)="storeService.removeItemFromItemList($index)" mat-icon-button class="del-btn">
                         <mat-icon fontIcon="delete"></mat-icon>
@@ -214,9 +216,9 @@
             }
         </div>
         <button (click)="storeService.addItemToItemList()" class="btn-add-new-invoice" mat-flat-button>Add New Invoice</button>
-        <div class="form-action">
-            <button (click)="storeService.addNewInvoiceToStore('draft')" class="btn-action-cancel" mat-flat-button>Cancel</button>
-            <button (click)="storeService.addNewInvoiceToStore('pending')" class="btn-action-save" mat-flat-button>Save Changes</button>
-        </div>
     </div>
+</div>
+<div class="form-action">
+    <button (click)="storeService.addNewInvoiceToStore('draft')" class="btn-action-cancel" mat-flat-button>Cancel</button>
+    <button (click)="storeService.addNewInvoiceToStore('pending')" class="btn-action-save" mat-flat-button>Save Changes</button>
 </div>

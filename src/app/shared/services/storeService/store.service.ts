@@ -4,112 +4,75 @@ import { Invoice, Item } from '../../models/store.types';
 import { InvoiceState } from '../../state/invoice.entity';
 import { Store } from '@ngrx/store';
 import * as InvoiceActions from '../../state/invoice.action';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { addInvoice } from '../../state/invoice.action';
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
-
-  createdAt = new FormControl('', [Validators.required]);
-  paymentDue = new FormControl('', [Validators.required]);
-  description = new FormControl('', [Validators.required]);
-  paymentTerms = new FormControl(1, [Validators.required, Validators.min(1)]);
-  clientEmail = new FormControl('', [Validators.required, Validators.email]);
-  clientName = new FormControl('', [Validators.required]);
-  senderStreet = new FormControl('', [Validators.required]);
-  senderCity = new FormControl('', [Validators.required]);
-  senderPostCode = new FormControl('', [Validators.required]);
-  senderCountry = new FormControl('', [Validators.required]);
-  clientStreet = new FormControl('', [Validators.required]);
-  clientCity = new FormControl('', [Validators.required]);
-  clientPostCode = new FormControl('', [Validators.required]);
-  clientCountry = new FormControl('', [Validators.required]);
-  items = new FormControl(0, [Validators.required]);
-  total = new FormControl(0, [Validators.required]);
-  // addInvoiceForm: FormGroup;
-  // addInvoiceForm = new FormGroup({
-  //   createdAt: this.createdAt,
-  //   paymentDue: this.paymentDue,
-  //   description: this.description,
-  //   paymentTerms: this.paymentTerms,
-  //   clientEmail: this.clientEmail,
-  //   clientName: this.clientName,
-  //   senderStreet: this.senderStreet,
-  //   senderCity: this.senderCity,
-  //   senderPostCode: this.senderPostCode,
-  //   senderCountry: this.senderCountry,
-  //   clientStreet: this.clientStreet,
-  //   clientCity: this.clientCity,
-  //   clientPostCode: this.clientPostCode,
-  //   clientCountry: this.clientCountry,
-  //   items: this.items,
-  //   total: this.total
-  // });
-  addInvoiceForm = new FormGroup({
-    createdAt: new FormControl('', Validators.required),
-    paymentDue: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
-    paymentTerms: new FormControl(1, [Validators.required, Validators.min(1)]),
-    clientEmail: new FormControl('', [Validators.required, Validators.email]),
-    clientName: new FormControl('', Validators.required),
-    senderStreet: new FormControl('', Validators.required),
-    senderCity: new FormControl('', Validators.required),
-    senderPostCode: new FormControl('', Validators.required),
-    senderCountry: new FormControl('', Validators.required),
-    clientStreet: new FormControl('', Validators.required),
-    clientCity: new FormControl('', Validators.required),
-    clientPostCode: new FormControl('', Validators.required),
-    clientCountry: new FormControl('', Validators.required),
-    items: new FormControl(0, Validators.required),
-    total: new FormControl(0, Validators.required),
-  });
+  addInvoiceForm: FormGroup;
   constructor(
     private apiService:ApiService,
     private store: Store<InvoiceState>,
     private fb: FormBuilder
   ) { 
-  }
-
-  newInvoice: Invoice= {
-    id: "",
-    createdAt: "",
-    paymentDue: "",
-    description: "",
-    paymentTerms: 1,
-    clientName: "",
-    clientEmail: "",
-    status: "",
-    senderAddress: {
-      street: "",
-      city: "",
-      postCode: "",
-      country: ""
-    },
-    clientAddress: {
-      street: "",
-      city: "",
-      postCode: "",
-      country: ""
-    },
-    items: [],
-    total: 0
+    this.addInvoiceForm = this.fb.group({
+      createdAt: new FormControl('', Validators.required),
+      paymentDue: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      paymentTerms: new FormControl(1, [Validators.required, Validators.min(1)]),
+      clientEmail: new FormControl('', [Validators.required, Validators.email]),
+      clientName: new FormControl('', Validators.required),
+      senderStreet: new FormControl('', Validators.required),
+      senderCity: new FormControl('', Validators.required),
+      senderPostCode: new FormControl('', Validators.required),
+      senderCountry: new FormControl('', Validators.required),
+      clientStreet: new FormControl('', Validators.required),
+      clientCity: new FormControl('', Validators.required),
+      clientPostCode: new FormControl('', Validators.required),
+      clientCountry: new FormControl('', Validators.required),
+      items: this.fb.array([]),
+      total: new FormControl(0, Validators.required),
+    });
+    
   }
   submitted = false;
+
+
+
+  get addNewItemToList(): FormArray {
+    return this.addInvoiceForm.get('items') as FormArray;
+  }
+  createItem(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      quantity: [0, Validators.required],
+      price: [0, Validators.required],
+      total: [{value: 0, disabled: true}],
+    });
+  }
   addItemToItemList(){
-    let emptyItem:Item = {
-      name: '',
-      quantity: 0,
-      price: 0,
-      total: 0
-    }
-    this.newInvoice.items.push(emptyItem);
+    this.addNewItemToList.push(this.createItem());
   }
   removeItemFromItemList(index:number){
-    this.newInvoice.items.splice(index, 1);
+    this.addNewItemToList.removeAt(index);
+    // this.newInvoice.items.splice(index, 1);
+  }
+  formatDate(date: Date): string {
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  }
+  calculatePaymentDue(date: Date, paymentTerms: number): string {
+    const dueDate = new Date(date);
+    dueDate.setDate(dueDate.getDate() + paymentTerms);
+    return this.formatDate(dueDate);
   }
   setPaymentPlan(paymentPlan:number){
-    this.newInvoice.paymentTerms = paymentPlan;
+    let createdAt = `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`
+    this.addInvoiceForm.get('createdAt')?.setValue(createdAt);
+    this.addInvoiceForm.get('paymentTerms')?.setValue(paymentPlan);
+    this.addInvoiceForm.get('paymentDue')?.setValue(this.calculatePaymentDue(new Date(), paymentPlan))
+    document.getElementById("paymentTerms")!.innerText = paymentPlan>1 ? `Net ${paymentPlan} Days`:`Net ${paymentPlan} Day`;
+    
   }
   addNewInvoiceToStore(status:string){
     this.submitted = !this.submitted
