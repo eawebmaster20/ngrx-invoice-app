@@ -129,8 +129,8 @@ h3{
 }
 
 .btn-danger{
-    background-color: var(--danger-2);
-    color: white;
+    background-color: var(--danger-2) !important;
+    color: white !important;
 
     &:hover{
         background-color: var(--danger-1);
