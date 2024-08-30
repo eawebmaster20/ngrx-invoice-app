@@ -25,9 +25,11 @@
                             <img src="assets/icons/carret.svg" alt="" srcset="">
                         </span>
                         <ul  class="input-select-options">
-                            @for(){}
-                            {
-                                <li> {{}}</li>
+                            @for(opt of filterOptions; track opt){
+                                <li (click)="onValueChange(opt)">
+                                    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                    <label for="vehicle1"> I have a bike</label>
+                                </li>
                             }
                         </ul>
                     </div>
@@ -36,12 +38,13 @@
             [buttonText]="'New'"
             [imgUrl]="'assets/icons/add.svg'"
             (execute)="buttonClick($event)"
+            routerLink="new"
             />
         </div>
     </div>
     <div class="table-container">
         @for(invoice of invoices | async | filter: statusFilters;track invoice)
-        {<div class="invoice-card">
+        {<div class="invoice-card" [routerLink]="'details/'+invoice.id">
             <h3 class="id h3-mini"><span class="text-muted">#</span>RT3080</h3>
             <div class="date text-muted">
                 <span>Due</span>
