@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" [formGroup]="storeService.addInvoiceForm">
     <span class="back-btn" routerLink="/">
         <img src="assets/images/icon-arrow-left.svg" alt="" srcset="">    
         back
@@ -175,16 +175,17 @@
         </div>
         
           
-        <div class="items-form">
+        <div class="items-form" formArrayName="items">
             <h2 class="text-muted title">Item List</h2>
-            @for(item of storeService.addInvoiceForm.get('items')?.value; track $index){
+            @for(item of storeService.addNewItemToList.controls; track $index){
                 <div class="add-item" [formGroupName]="$index">
                     <div class="input-group input-group-1">
                         <label class="text-muted" for="app-input-1">Item Name</label>
                         <input
+                            [id]="'itemname'+$index"
                             Class="input input-text"
                             type="text"
-                            formControlName="name"
+                            [formControlName]="'name'"
                             >
                     </div>
                     <div class="input-group input-group-2">
@@ -192,7 +193,7 @@
                         <input
                             Class="input input-text"
                             type="number"
-                            formControlName="quantity"
+                            [formControlName]="'quantity'"
                             >
                     </div>
                     <div class="input-group input-group-3">
@@ -200,7 +201,7 @@
                         <input
                             Class="input input-text"
                             type="Number"
-                            formControlName="price"
+                            [formControlName]="'price'"
                             >
                     </div>
                     <div class="input-group input-group-4">
