@@ -4,6 +4,7 @@ import { InvoiceDetailsPageComponent } from './pages/invoice-details-page/invoic
 import { FormComponent } from './shared/components/form/form.component';
 
 export const routes: Routes = [
-    {path: '', component:FormComponent},
+    {path: '', component:HomePageComponent},
+    {path: 'new', component:FormComponent},
     {path:'details/:id', component:InvoiceDetailsPageComponent}
 ];
