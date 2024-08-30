@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ButtonComponent } from './shared/components/button/button.component';
-import { InputComponent } from './shared/components/input/input.component';
 import { StoreService } from './shared/services/storeService/store.service';
 import { ApiService } from './shared/services/api-service/api.service';
 import { Store } from '@ngrx/store';
@@ -9,7 +8,7 @@ import { fetchInvoices } from './shared/state/invoice.action';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonComponent,InputComponent],
+  imports: [RouterOutlet, ButtonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
