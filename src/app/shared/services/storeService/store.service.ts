@@ -40,7 +40,7 @@ export class StoreService {
 
 
 
-  get items(): FormArray {
+  get addNewItemToList(): FormArray {
     return this.addInvoiceForm.get('items') as FormArray;
   }
   createItem(): FormGroup {
@@ -52,10 +52,10 @@ export class StoreService {
     });
   }
   addItemToItemList(){
-    this.items.push(this.createItem());
+    this.addNewItemToList.push(this.createItem());
   }
   removeItemFromItemList(index:number){
-    this.items.removeAt(index);
+    this.addNewItemToList.removeAt(index);
     // this.newInvoice.items.splice(index, 1);
   }
   formatDate(date: Date): string {
