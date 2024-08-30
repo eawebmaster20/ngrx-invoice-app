@@ -1,34 +1,37 @@
-import { Component } from '@angular/core';
-import { ButtonComponent } from '../button/button.component';
-import { InputComponent } from '../input/input.component';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Invoice, Item } from '../../models/store.types';
-import { addInvoice, deleteInvoice, setTheme, updateInvoice } from '../../state/invoice.action';
 import { InvoiceState } from '../../state/invoice.entity';
-import { Update } from '@ngrx/entity';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { StoreService } from '../../services/storeService/store.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { CustomDatePipe } from '../../pipes/custom-date.pipe';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-form',
   standalone: true,
+  providers:[provideNativeDateAdapter()],
   imports: [
-    ButtonComponent,
-    InputComponent, 
     MatButtonModule, 
     MatIconModule,
     FormsModule, 
     MatFormFieldModule, 
     MatInputModule, 
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    MatDatepickerModule, 
+    CustomDatePipe,
+    RouterLink
+  ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
-export class FormComponent {
+export class FormComponent implements OnInit {
   textValue: string = '';
 
   testData:Invoice = {
@@ -131,9 +134,17 @@ export class FormComponent {
     
   }
 
+  onValueChange(event: any) {
+    const newValue = event.target.value;
+    console.log("this.value");
+  }
   logDate(event:any) {
     console.log(event);
   }
-
+  ngOnInit() {
+    // if (this.storeService.items.length === 0) {
+    //   this.storeService.addItemToItemList();
+    // }
+  }
 
 }

@@ -2,6 +2,18 @@
     display: flex;
     flex-direction: column;
     margin: 0 1.5rem;
+    .back-btn{
+        gap: 1rem;
+        display: flex;
+        width: fit-content;
+        padding: 1rem;
+        cursor: pointer;
+
+        &:hover{
+            background-color: var(--blue-1);
+            border-radius: 8px;
+        }
+    }
     .form-container{
         .input-group{
             display: flex;
@@ -144,29 +156,44 @@
             width: 100%;
             border-radius: 24px;
         }
-        .form-action{
-            display: flex;
-            justify-content: end;
-            gap: 0.5rem;
-            .btn-action-cancel, .btn-action-save{
-                height: 48px;
-                width: auto !important;
-                background-color: var(--blue-1);
-                color: var(--blue-3);
-                margin: 0 0 3rem 0;
-                border-radius: 24px;
-            }
-            .btn-action-save{
-                background-color: var(--blue-5);
-                color: #fff;
-                &:hover{
-                    background-color: var(--blue-4);
-                }
-            }
+    }
+}
+.form-action{
+    display: flex;
+    height: 91px;
+    justify-content: end;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1.5rem;
+    box-shadow: 0 -33px 48px rgba(0, 0, 0, 0.05);
+    .btn-action-cancel, .btn-action-save{
+        height: 48px;
+        width: auto !important;
+        background-color: var(--blue-1);
+        color: var(--blue-3);
+        border-radius: 24px;
+    }
+    .btn-action-save{
+        background-color: var(--blue-5);
+        color: #fff;
+        &:hover{
+            background-color: var(--blue-4);
         }
     }
 }
-
+.date-picker-container{
+    position: relative;
+    cursor: pointer;
+    .date-icon{
+        position: absolute;
+        z-index: 1;
+        right: 16px;
+        top: 16px;
+    }
+}
+.input-date{
+    cursor: pointer;
+}
 .input{
     height: 48px;
     width: 100%;
