@@ -44,27 +44,73 @@ main{
         grid-area: bot-right;
     }
 }
-    // display: flex;
-    // justify-content: space-between;
+.input{
+    height: 48px;
+    width: 100%;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    padding: 0;
+    border: 1px solid var(--blue-2);
+    box-sizing: border-box;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+.input-select{
+    // border: 1px solid var(--blue-2);
+    position: relative;
+    display: flex;
+    // width: fit-content;
+    align-items: center;
+    color: var(--dark-6);
+    cursor: pointer;
+    
+    &:hover{
+        .input-select-options{
+            display: block !important;
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            left: 0;
+            background-color: white;
+            border-radius: 0.25rem;
+            border: 1px solid var(--blue-2);
+            box-shadow: 0 9px 12px 4px var(--blue-2);
+            z-index: 100;
+            padding: 0;
+            margin: 0;
+    
+            li{
+                list-style: none;
+                height: 48px;
+                border-top: 1px solid var(--blue-2);
+                display: flex;
+                align-items: center;
+                padding: 0 1rem 0 1.25rem;
+    
+                &:first-child{
+                    border-top: none
+                }
+                
+                &:hover{
+                    color: var(--blue-3);
+                    cursor: pointer;
+                }
+            }
+        }
+        
+    }
+    .selected-value{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .input-select-options{
+        display: none;
+    }
 
-    // .left{
-    //     .id{
-    //         span{
-    //             color: var(--dark-1);
-    //         }
-    //     }
-    //     .date{
-    //         display: flex;
-    //         align-items: center;
-    //     }
-    // }
-    // .right{
-    //     .card-btn{
-    //      border-radius: 6px;   
-    //      width: 104px;
-    //     }
-    // }
-
+    
+}
 p{
     margin:0;
 }
