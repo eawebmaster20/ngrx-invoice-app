@@ -25,12 +25,19 @@
                             <img src="assets/icons/carret.svg" alt="" srcset="">
                         </span>
                         <ul  class="input-select-options">
-                            @for(opt of filterOptions; track opt){
-                                <li (click)="onValueChange(opt)">
-                                    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                    <label for="vehicle1"> I have a bike</label>
-                                </li>
-                            }
+                              <li>
+                                  <input (change)="onValueChange()" [(ngModel)]="statusFilters.paid" type="checkbox" id="pending" name="pending" value="Bike">
+                                  <label for="paid"> Paid</label>
+                              </li>
+                              <li>
+                                  <input (change)="onValueChange()" [(ngModel)]="statusFilters.pending" type="checkbox" id="pending" name="pending" value="Bike">
+                                  <label for="pending"> Pending</label>
+                              </li>
+
+                              <li>
+                                <input (change)="onValueChange()" [(ngModel)]="statusFilters.draft" type="checkbox" id="draft" name="draft" value="Bike">
+                                <label for="draft"> Draft</label>
+                            </li>
                         </ul>
                     </div>
             <app-button 
@@ -43,20 +50,46 @@
         </div>
     </div>
     <div class="table-container">
-        @for(invoice of invoices | async | filter: statusFilters;track invoice)
-        {<div class="invoice-card" [routerLink]="'details/'+invoice.id">
-            <h3 class="id h3-mini"><span class="text-muted">#</span>RT3080</h3>
-            <div class="date text-muted">
-                <span>Due</span>
-                <p>19 Aug 2022</p>
-            </div>
-            <h3 class="h3-mini name text-muted">Jensen Huang</h3>
-            <h3 class="amount">£ 1,800.90</h3>
-            <button (click)="goToDetail(invoice.id)" class="card-btn btn">
-                <span>.</span>
-                Paid
-            </button>
-        </div>}
+        @for(invoice of onValueChange();;track invoice)
+        {
+            <div class="invoice-card card">
+                <div class="invoice__id">
+                  <p>
+                    #<span class="id">{{ invoice.id }}</span>
+                  </p>
+                </div>
+                <div class="invoice__name">
+                  <p class="name">{{ invoice.clientName }}</p>
+                </div>
+                <div class="invoice__date">
+                  <p class="due-date">{{ invoice.paymentDue | date : "mediumDate" }}</p>
+                </div>
+                <div class="invoice__price">
+                  <p class="price">
+                    {{ invoice.total | currency : "GBP" : "symbol" : "1.2-2" }}
+                  </p>
+                </div>
+                <div class="invoice__status">
+                    <button (click)="goToDetail(invoice.id)" [class]="invoice.status" class="card-btn btn">
+                        <span>.</span>
+                        {{invoice.status}}
+                    </button>
+                </div>
+                <div class="invoice__right-arrow">
+                  <span class="icon flex-center">
+                    <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M1 1l4 4-4 4"
+                        stroke="#7C5DFA"
+                        stroke-width="2"
+                        fill="none"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+    }
         @empty {
             <p class="empty-message">No invoices found</p>
         }
