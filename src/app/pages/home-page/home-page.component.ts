@@ -9,11 +9,13 @@ import { selectAllInvoices, selectTheme } from '../../shared/state/invoice.selec
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FilterPipe } from '../../shared/pipes/filter/filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [ButtonComponent, CommonModule, FilterPipe,RouterLink],
+  providers:[FilterPipe],
+  imports: [FormsModule, ButtonComponent, CommonModule,RouterLink],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
@@ -26,10 +28,11 @@ export class HomePageComponent {
     pending: false,
     draft: false,
   };
+  localInvoices:Invoice[]=[]
   invoices: Observable<Invoice[]> = this.store.select(selectAllInvoices);
   theme: Observable<any> = this.store.select(selectTheme);
-  constructor(public store:Store<{invoices:InvoiceState}>, private router:Router){
-    // this.invoices.subscribe(items =>console.log(items));
+  constructor(private filterPipe: FilterPipe,public store:Store<{invoices:InvoiceState}>, private router:Router){
+    this.invoices.subscribe(items =>this.localInvoices = items);
     // this.theme.subscribe(items =>console.log(items));
     this.store.dispatch(fetchInvoices())
   }
@@ -39,9 +42,9 @@ export class HomePageComponent {
   buttonClick(event:any) {
     console.log('Button clicked in the parent component', event);
   }
-  onValueChange(event:any) {
-    console.log(event);
-    document.getElementById("paymentTerms")!.innerText =event
+  onValueChange() {
+    console.log(this.statusFilters);
+    return this.filterPipe.transform(this.localInvoices, this.statusFilters);
   }
   goToDetail(invoiceId: string) {
     console.log('Button clicked in the parent component', invoiceId);
