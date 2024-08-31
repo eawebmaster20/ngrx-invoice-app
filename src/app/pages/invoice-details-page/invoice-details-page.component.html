@@ -1,59 +1,43 @@
-<div class="container-fluid">
-    <div class="div1">
-        <h3 class="id h3-mini"><span class="text-muted">#</span>RT3080</h3>
-        <h3 class="h3-mini text-muted light-txt">Graphic Design</h3>
+<main class="invocie-detail">
+    <div class="content-wrapper">
+      <button routerLink="" class="back-btn custom-button">
+        <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M6.342.886L2.114 5.114l4.228 4.228"
+            stroke="#9277FF"
+            stroke-width="2"
+            fill="none"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <span>Back</span>
+      </button>
+  
+      @if(selectedInvoice | async; as invoice) {
+      <app-invoice-detail-header [invoice]="invoice" />
+      <app-invoice-detail-content [invoice]="invoice" />
+  
+      }
+      <!-- <p>
+        {{ (invoice$ | async)?.id }} || {{ (invoice$ | async)?.clientName }} ||
+        {{ (invoice$ | async)?.clientEmail }}
+        {{ (invoice$ | async)?.paymentDue }} ||
+        {{ (invoice$ | async)?.status }}
+      </p>
+  
+      @if(invoice$ | async; as invoice){
+      <button (click)="deleteInvoice(invoice.id)">delete</button>
+      <button (click)="markAsPaid(invoice.id)">Mark as paid</button>
+      <button (click)="markAsPending(invoice.id)">Mark as pending</button>
+      <button (click)="testInvoice(invoice.id)">Edit data</button>
+  
+      }
+  
+      <h1>Edit Invoice</h1>
+  
+      @if(invoice$ | async; as invoice){
+      <app-invoice-form [invoice]="invoice" />
+  
+      } -->
     </div>
-    <div class="div2"> 
-        <h3 class="h3-mini text-muted light-txt">19 Union Terrace</h3>
-        <h3 class="h3-mini text-muted light-txt">London</h3>
-        <h3 class="h3-mini text-muted light-txt">E1 3EZ</h3>
-        <h3 class="h3-mini text-muted light-txt">United Kingdom</h3>
-    </div>
-    <div class="div3"> 
-        <h3 class="h3-mini text-muted light-txt">Bill To</h3>
-        <h3>Alex Grim</h3>
-        <h3 class="h3-mini text-muted light-txt">
-            84 Church Way Bradford BD1 9PB United Kingdom
-        </h3>
-    </div>
-    <div class="div4"> 
-        <div>
-            <h3 class="h3-mini text-muted light-txt">United Kingdom</h3>
-            <h3>21 Aug 2021</h3>
-        </div>
-        
-        <div>
-            <h3 class="h3-mini text-muted light-txt">Payment Due</h3>
-            <h3>20 Sep 2021</h3> 
-        </div>
-    </div>
-    <div class="div5"> 
-        <h3 class="h3-mini text-muted light-txt">Sent to</h3>
-        <h3>alexgrimmail.com</h3> 
-    </div>
-    <div class="div6">
-        <h3 class="h3-mini">Banner Design</h3>
-        <h3 class="h3-mini text-muted amount-txt">1 x £ 156.00</h3>
-    </div>
-    <div class="div7">
-        <h3 class="h3-mini">£ 156.00</h3>
-    </div>
-    <div class="div8">
-        <h3 class="h3-mini">Banner Design</h3>
-        <h3 class="h3-mini text-muted amount-txt">1 x £ 156.00</h3>
-    </div>
-    <div class="div9">
-        <h3 class="h3-mini">£ 110.00</h3>
-    </div>
-    <div class="div10">
-        Grand Total
-    </div>
-    <div class="div11">
-        <h3>£ 556.00</h3>
-    </div>
-    </div>
-    <div class="form-action">
-        <button class="btn-action-cancel" mat-flat-button>Cancel</button>
-        <button class="btn-action-cancel btn-danger" mat-flat-button>Cancel</button>
-        <button class="btn-action-save" mat-flat-button>Save Changes</button>
-    </div>
+  </main>
