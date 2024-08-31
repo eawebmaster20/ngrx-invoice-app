@@ -1,0 +1,96 @@
+.card {
+    .status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: .8rem;
+      
+      .status-label {
+        color: var(--text-secondary);
+      }
+    }
+  
+    .actions {
+      padding: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .8rem;
+      background: white;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  
+    div.flex {
+      gap: .8rem;
+    }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .card {
+      .status {
+        justify-content: initial;
+      }
+      
+      .actions {
+        position: static;
+        justify-content: initial;
+        padding: 0;
+      }
+  
+      div.flex {
+        flex-wrap: nowrap;
+  
+        button.btn-primary {
+          min-width: 9rem;
+        }
+      }
+    }
+  }
+  
+
+  .status {
+    color: var(--text-primary);
+    display: flex;
+    gap: .5rem;
+    max-width: fit-content;
+  
+    .circle {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--light-green);
+      border-radius: 50%;
+    }
+  
+    &.pending {
+      background-color: rgba(255, 143, 0, 0.1);
+      color: #FF8F00;
+  
+      .circle {
+        background-color: #FF8F00;
+      }
+    }
+  
+    &.paid {
+      background-color: rgba(51, 214, 159, 0.1);
+      color: #33D69F;
+  
+      .circle {
+        background-color: #33D69F;
+      }
+    }
+  
+    &.draft {
+      background-color: rgba(223, 227, 250, 0.1);
+      color: #373B53;
+  
+      .circle {
+        background-color: #373B53;
+      }
+    }
+  }
+  

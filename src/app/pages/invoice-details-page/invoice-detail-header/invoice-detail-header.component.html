@@ -1,0 +1,22 @@
+<div class="card flex-between">
+    <div class="status">
+      <span class="status-label">Satus</span>
+      <div class="tag status flex-center" [class]="invoice.status.toLowerCase()">
+        <span class="circle"></span>
+        <span class="status">{{ invoice.status }}</span>
+      </div>
+    </div>
+  
+    <!-- actions -->
+    <div class="actions ">
+      <button class="btn btn-secondary">Edit</button>
+      <div class="flex">
+        <button (click)="deleteInvoice(invoice.id)" class="btn btn-warning">Delete</button>
+        @if(invoice.status === 'paid'){
+          <button (click)="markAsPending(invoice.id)" class="btn btn-primary">Mark as Pending</button>
+        } @else {
+          <button (click)="markAsPaid(invoice.id)" class="btn btn-primary">Mark as Paid</button>
+        }
+      </div>
+    </div>
+  </div>
