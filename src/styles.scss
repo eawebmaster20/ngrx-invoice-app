@@ -4,6 +4,17 @@
     font-optical-sizing: auto;
     font-style: normal;
 
+    --fs-xl: 32px;
+    --fs-lg: 24px;
+    --fs-md: 18px;
+    --fs-base: 16px;
+    --fs-sm: 14px;
+    --fs-xs: 12px;
+
+
+
+    --white:#FFFFFF
+
     --dark-1:#888EB0;
     --dark-2:#494E6E;
     --dark-3:#373B53;
@@ -15,12 +26,18 @@
     --blue-1:#F8F8FB;
     --blue-2:#DFE3FA;
     --blue-3:#7E88C3;
-    --blue-4:#9277FF;
-    --blue-5:#7C5DFA;
+    --blue-4:#9277FF; //---
+    --blue-5:#7C5DFA; //---
     --blue-6:#F9FAFE;
 
     --danger-1:#FF9797;
     --danger-2:#EC5757;
+    --light-green: #eafbf5;
+    --light-orange: #fff4e5;
+    --green: #33D69F;
+    --orange: #FF8F00;
+    --red: #EC5757;
+    --black: #0C0E16;
 }
 
 input::-webkit-outer-spin-button,
