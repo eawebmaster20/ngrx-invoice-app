@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import * as InvoiceActions from '../../state/invoice.action';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { addInvoice } from '../../state/invoice.action';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,8 @@ export class StoreService {
   constructor(
     private apiService:ApiService,
     private store: Store<InvoiceState>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router:Router
   ) { 
     this.addInvoiceForm = this.fb.group({
       createdAt: new FormControl('', Validators.required),
@@ -56,7 +58,6 @@ export class StoreService {
   }
   removeItemFromItemList(index:number){
     this.addNewItemToList.removeAt(index);
-    // this.newInvoice.items.splice(index, 1);
   }
   formatDate(date: Date): string {
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
@@ -75,10 +76,14 @@ export class StoreService {
     
   }
   addNewInvoiceToStore(status:string){
-    this.submitted = !this.submitted
-    console.log(this.addInvoiceForm.valid)
+    if (this.addInvoiceForm.valid) {
+      this.submitted = !this.submitted
+      this.addInvoiceForm.value.id = "NEWi185"
+      this.store.dispatch(addInvoice({invoice: this.addInvoiceForm.value}))
+      
+      this.router.navigate([''])
+      return;
+    }
     console.log(this.addInvoiceForm)
-    // this.newInvoice.id = "NEWi185"
-    // this.store.dispatch(addInvoice({invoice: this.newInvoice}))
   }
 }
