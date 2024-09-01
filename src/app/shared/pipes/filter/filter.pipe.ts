@@ -24,3 +24,13 @@ export class FilterPipe implements PipeTransform {
   }
 
 }
+
+// transform(items: Invoice[] | null, status:string[] ) {
+//   if (items!.length <1 || status.length<1) {
+//     console.log(items);
+//     return items;
+//   }
+//     let res= items?.filter(item => status.includes(item.status));
+//     console.log(res);
+//     return res;
+//   }
