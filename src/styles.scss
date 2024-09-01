@@ -13,7 +13,7 @@
 
 
 
-    --white:#FFFFFF
+    --white:#FFFFFF;
 
     --dark-1:#888EB0;
     --dark-2:#494E6E;
@@ -44,6 +44,9 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+.p{
+    color: var(--dark-1);
 }
 .text-muted{
     color: var(--dark-1);
@@ -163,34 +166,37 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: var(--dark-3);
     height: 72px;
     display: flex;
+
     .logo-theme-container{
         display: flex;
         align-items: center;
         width: 100%;
         justify-content: space-between;
-        .theme-img-btn{
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-            background-image: url('./assets/images/icon-sun.svg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: transparent;
-            border: none;          
-        }
+        
     }
+
     .divider{
         width: 2px;
         height: 100%;
         background-color: var(--dark-2);
-        margin: 0 26px 0 24px;
+        // margin: 0 26px 0 24px;
+    }
+    .theme-img-btn{
+        cursor: pointer;
+        // width: 20px;
+        // height: 20px;
+        // background-image: url('./assets/images/icon-sun.svg');
+        // background-size: cover;
+        // background-position: center;
+        // background-repeat: no-repeat;
+        background-color: transparent;
+        border: none;          
     }
     .profile{
         display: flex;
         align-items: center;
         .profile-img{
-            margin-right: 26px;
+            // margin-right: 26px;
             width: 32px;
             height: 32px;
             border-radius: 50%;
@@ -201,6 +207,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .action-bar{
     display: flex;
     justify-content: space-between;
+    margin: 32px 0;
     .invoice-info{
         display: flex;
         flex-direction: column;
@@ -214,5 +221,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .action-bar-action{
         display: flex;
         gap: 18px;
+
+        .add-new-btn-txt{
+            &::before{
+                content:"Add"
+            }
+        }
+        .selected-value{
+            .txt{
+                &::before{
+                    content: "Filter";
+                }
+            }
+        }
     }
 }
+
+
+
