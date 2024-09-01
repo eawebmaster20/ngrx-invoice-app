@@ -1,97 +1,111 @@
-<div class="sidebar">
-    <div class="logo-theme-container">
-        <img src="assets/images/logo.svg" alt="" srcset="">
-        <button class="theme-img-btn"></button>
-    </div>
-    <span class="divider"></span>
-    <div class="profile">
-        <span>
-            <img class="profile-img" src="assets/images/image-avatar.jpg" alt="" srcset="">
-        </span>
-    </div>
-</div>
-<main>
-    <div class="action-bar">
-        <div class="invoice-info">
-            <h2>Invoices</h2>
-            <p class="">7 invoices</p>
+<div class="flex-it">
+  <div class="container-fluid">
+    <div class="sidebar">
+        <div class="logo-theme-container">
+          <img src="assets/images/logo.svg" alt="" srcset="">
         </div>
-        <div class="action-bar-action">
-            <div 
-                    Class="input input-select"
-                    >
-                        <span class="selected-value" id="paymentTerms">
-                            Filter
-                            <img src="assets/icons/carret.svg" alt="" srcset="">
-                        </span>
-                        <ul  class="input-select-options">
-                              <li>
-                                  <input (change)="onValueChange()" [(ngModel)]="statusFilters.paid" type="checkbox" id="pending" name="pending" value="Bike">
-                                  <label for="paid"> Paid</label>
-                              </li>
-                              <li>
-                                  <input (change)="onValueChange()" [(ngModel)]="statusFilters.pending" type="checkbox" id="pending" name="pending" value="Bike">
-                                  <label for="pending"> Pending</label>
-                              </li>
-
-                              <li>
-                                <input (change)="onValueChange()" [(ngModel)]="statusFilters.draft" type="checkbox" id="draft" name="draft" value="Bike">
-                                <label for="draft"> Draft</label>
-                            </li>
-                        </ul>
+        <div class="right">
+          <button class="theme-img-btn">
+            <img src="assets/images/icon-moon.svg" alt="" srcset="">
+          </button>
+          <span class="divider"></span>
+          <div class="profile">
+              <span>
+                  <img class="profile-img" src="assets/images/image-avatar.jpg" alt="" srcset="">
+              </span>
+          </div>
+      </div>
+    </div>
+    <main>
+        <div class="action-bar">
+            <div class="invoice-info">
+                <h2>Invoices</h2>
+                <p class="">
+                  {{
+                    (invoices | async)?.length 
+                    ? (invoices | async)?.length+' invoices'
+                    :'No invoices'}}
+                  
+                </p>
+            </div>
+            <div class="action-bar-action">
+                <div 
+                        Class="input-select"
+                        >
+                            <span class="selected-value" id="paymentTerms">
+                                <span class="txt"></span>
+                                <img src="assets/icons/carret.svg" alt="" srcset="">
+                            </span>
+                            <div class="input-select-options">
+                              <section class="options">
+                                <mat-checkbox color="primary" class="example-margin" [(ngModel)]="allStatus.paid">Paid</mat-checkbox>
+                                <mat-checkbox color="primary" class="example-margin" [(ngModel)]="allStatus.pending">Pending</mat-checkbox>
+                                <mat-checkbox color="primary" class="example-margin" [(ngModel)]="allStatus.draft">Draft</mat-checkbox>
+                              </section>
+                            </div>
+                        </div>
+                        
+                <button 
+                routerLink="new"
+                class="btn icon-btn btn-blue">
+                    <img src="assets/icons/add.svg" alt="add icon" srcset="">
+                    <span class="add-new-btn-txt"></span>
+                </button>
+            </div>
+        </div>
+        <div class="table-container">
+          <!-- @for(invoice of localInvoices ; track invoice) -->
+            @for(invoice of invoices | async; track invoice)
+            {
+                <div (click)="goToDetail(invoice.id)" class="invoice-card card">
+                    <div class="invoice__id">
+                      <p>
+                        #<span class="id">{{ invoice.id }}</span>
+                      </p>
                     </div>
-            <app-button 
-            [classList]="['btn icon-btn btn-blue']" 
-            [buttonText]="'New'"
-            [imgUrl]="'assets/icons/add.svg'"
-            (execute)="buttonClick($event)"
-            routerLink="new"
-            />
-        </div>
-    </div>
-    <div class="table-container">
-        @for(invoice of onValueChange();;track invoice)
-        {
-            <div class="invoice-card card">
-                <div class="invoice__id">
-                  <p>
-                    #<span class="id">{{ invoice.id }}</span>
-                  </p>
-                </div>
-                <div class="invoice__name">
-                  <p class="name">{{ invoice.clientName }}</p>
-                </div>
-                <div class="invoice__date">
-                  <p class="due-date">{{ invoice.paymentDue | date : "mediumDate" }}</p>
-                </div>
-                <div class="invoice__price">
-                  <p class="price">
-                    {{ invoice.total | currency : "GBP" : "symbol" : "1.2-2" }}
-                  </p>
-                </div>
-                <div class="invoice__status">
-                    <button (click)="goToDetail(invoice.id)" [class]="invoice.status" class="card-btn btn">
-                        <span>.</span>
-                        {{invoice.status}}
-                    </button>
-                </div>
-                <div class="invoice__right-arrow">
-                  <span class="icon flex-center">
-                    <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M1 1l4 4-4 4"
-                        stroke="#7C5DFA"
-                        stroke-width="2"
-                        fill="none"
-                        fill-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                </div>
-              </div>
-    }
-        @empty {
-            <p class="empty-message">No invoices found</p>
+                    <div class="invoice__name">
+                      <p class="name">{{ invoice.clientName }}</p>
+                    </div>
+                    <div class="invoice__date">
+                      <p class="due-date">{{ invoice.paymentDue | date : "mediumDate" }}</p>
+                    </div>
+                    <div class="invoice__price">
+                      <p class="price">
+                        {{ invoice.total | currency : "GBP" : "symbol" : "1.2-2" }}
+                      </p>
+                    </div>
+                    <div class="invoice__status">
+                        <button (click)="goToDetail(invoice.id)" [class]="invoice.status" class="card-btn btn">
+                            <span>.</span>
+                            {{invoice.status}}
+                        </button>
+                    </div>
+                    <div class="invoice__right-arrow">
+                      <span class="icon flex-center">
+                        <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M1 1l4 4-4 4"
+                            stroke="#7C5DFA"
+                            stroke-width="2"
+                            fill="none"
+                            fill-rule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
         }
-    </div>
-</main>
+            @empty {
+              <div class="container-empty">
+                <img src="assets/images/illustration-empty.svg" alt="" srcset="">
+              </div>
+              <h2>There is nothing here</h2>
+                <p class="empty-message p">
+                  Create an invoice by clicking the 
+                  New button and get started
+                </p>
+            }
+        </div>
+    </main>
+  </div>
+</div>
