@@ -10,11 +10,15 @@
         color: var(--text-secondary);
       }
     }
-  
+  .btn-stat{
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+  }
     .actions {
       padding: 1.2rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: end;
       align-items: center;
       gap: .8rem;
       background: white;
@@ -22,12 +26,38 @@
       bottom: 0;
       left: 0;
       right: 0;
+      .gap{
+        display: flex;
+      }
+      .btn{
+        padding: 0 1.5rem;
+      }
+      .btn-primary {
+        background-color: var(--blue-5);
+            color: #fff;
+            &:hover{
+                background-color: var(--blue-4);
+            }
+      }
+      .btn-edit{
+        background-color: var(--blue-1);
+            color: var(--blue-3);
+      }
     }
   
     div.flex {
       gap: .8rem;
     }
   }
+  
+  .flex-between{
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    border-radius: 0.5rem;
+    padding: 0 2rem;
+  }
+
   
   @media screen and (min-width: 1024px) {
     .card {

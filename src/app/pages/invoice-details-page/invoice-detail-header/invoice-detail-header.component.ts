@@ -5,6 +5,7 @@ import { Invoice } from '../../../shared/models/store.types';
 import { deleteInvoice, updateInvoice } from '../../../shared/state/invoice.action';
 import { InvoiceState } from '../../../shared/state/invoice.entity';
 import { Update } from '@ngrx/entity';
+import { StoreService } from '../../../shared/services/storeService/store.service';
 
 @Component({
   selector: 'app-invoice-detail-header',
@@ -18,7 +19,11 @@ export class InvoiceDetailHeaderComponent {
   testData1 = {
     status: "pending"
   }
-  constructor(private router: Router, private store: Store<{invoices:InvoiceState}>) {}
+  constructor(
+    private router: Router, 
+    private storeService: StoreService,
+    private store: Store<{invoices:InvoiceState}>
+  ) {}
 
   deleteInvoice = (id: string) => {
     this.store.dispatch(deleteInvoice({ id }));
@@ -29,15 +34,20 @@ export class InvoiceDetailHeaderComponent {
   markAsPaid = (id: string) => {
     const update: Update<Invoice> = {
           id:id,
-          changes:this.testData1
+          changes:{status: "paid"}
         };
     this.store.dispatch(updateInvoice({update}));
   };
   markAsPending = (id: string) => {
     const update: Update<Invoice> = {
           id:id,
-          changes:this.testData1
+          changes:{status: "pending"}
         };
     this.store.dispatch(updateInvoice({update}));
   };
+  editInvoice(invoice: Invoice){
+    this.storeService.setInvoiceData(invoice);
+    this.storeService.editMode=true;
+    this.router.navigate(['new']);
+  }
 }

@@ -5,18 +5,19 @@ import { InvoiceState } from '../../state/invoice.entity';
 import { Store } from '@ngrx/store';
 import * as InvoiceActions from '../../state/invoice.action';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { addInvoice } from '../../state/invoice.action';
-import { Router } from '@angular/router';
+import { Update } from '@ngrx/entity';
+
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
   addInvoiceForm: FormGroup;
+  submitted = false;
+  editMode: boolean = false;
   constructor(
     private apiService:ApiService,
     private store: Store<InvoiceState>,
-    private fb: FormBuilder,
-    private router:Router
+    private fb: FormBuilder
   ) { 
     this.addInvoiceForm = this.fb.group({
       createdAt: new FormControl('', Validators.required),
@@ -38,7 +39,6 @@ export class StoreService {
     });
     
   }
-  submitted = false;
 
 
 
@@ -58,6 +58,7 @@ export class StoreService {
   }
   removeItemFromItemList(index:number){
     this.addNewItemToList.removeAt(index);
+    // this.newInvoice.items.splice(index, 1);
   }
   formatDate(date: Date): string {
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
@@ -76,14 +77,69 @@ export class StoreService {
     
   }
   addNewInvoiceToStore(status:string){
+    this.submitted = !this.submitted
+    console.log(this.addInvoiceForm.valid)
     if (this.addInvoiceForm.valid) {
-      this.submitted = !this.submitted
-      this.addInvoiceForm.value.id = "NEWi185"
-      this.store.dispatch(addInvoice({invoice: this.addInvoiceForm.value}))
-      
-      this.router.navigate([''])
-      return;
+      if (this.editMode ) {
+        const update: Update<Invoice> = {
+          id:this.addInvoiceForm.value.id,
+          changes:this.addInvoiceForm.value
+        }
+        console.log(this.editMode)
+        this.store.dispatch(InvoiceActions.updateInvoice({update}));
+        this.editMode = false
+      }
+      else{
+        this.addInvoiceForm.value.id = this.generateUniqueId()
+        this.store.dispatch(InvoiceActions.addInvoice({invoice: this.addInvoiceForm.value}));
+      }
     }
-    console.log(this.addInvoiceForm)
   }
+
+  generateUniqueId(): string {
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const getRandomLetter = () => letters.charAt(Math.floor(Math.random() * letters.length));
+    const getRandomDigit = () => Math.floor(Math.random() * 10);
+  
+    const firstLetter = getRandomLetter();
+    const secondLetter = getRandomLetter();
+    const firstDigit = getRandomDigit();
+    const secondDigit = getRandomDigit();
+    const thirdDigit = getRandomDigit();
+    const fourthDigit = getRandomDigit();
+  
+    return `${firstLetter}${secondLetter}${firstDigit}${secondDigit}${thirdDigit}${fourthDigit}`;
+  }
+  setInvoiceData(data: any) {
+    this.addInvoiceForm.patchValue({
+      createdAt: data.createdAt,
+      paymentDue: data.paymentDue,
+      description: data.description,
+      paymentTerms: data.paymentTerms,
+      clientEmail: data.clientEmail,
+      clientName: data.clientName,
+      senderStreet: data.senderAddress.street,
+      senderCity: data.senderAddress.city,
+      senderPostCode: data.senderAddress.postCode,
+      senderCountry: data.senderAddress.country,
+      clientStreet: data.clientAddress.street,
+      clientCity: data.clientAddress.city,
+      clientPostCode: data.clientAddress.postCode,
+      clientCountry: data.clientAddress.country,
+      total: data.total
+    });
+  
+    const itemsArray = this.addInvoiceForm.get('items') as FormArray;
+    itemsArray.clear();
+  
+    data.items.forEach((item: any) => {
+      itemsArray.push(this.fb.group({
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+        total: item.total
+      }));
+    });
+  }
+  
 }

@@ -1,7 +1,7 @@
 <div class="card flex-between">
     <div class="status">
       <span class="status-label">Satus</span>
-      <div class="tag status flex-center" [class]="invoice.status.toLowerCase()">
+      <div class="tag status flex-center btn-stat" [class]="invoice.status.toLowerCase()">
         <span class="circle"></span>
         <span class="status">{{ invoice.status }}</span>
       </div>
@@ -9,9 +9,9 @@
   
     <!-- actions -->
     <div class="actions ">
-      <button class="btn btn-secondary">Edit</button>
-      <div class="flex">
-        <button (click)="deleteInvoice(invoice.id)" class="btn btn-warning">Delete</button>
+      <div class="flex gap">
+        <button (click)="editInvoice(invoice)" class="btn btn-edit btn-secondary">Edit</button>
+        <button (click)="deleteInvoice(invoice.id)" class="btn btn-danger btn-warning">Delete</button>
         @if(invoice.status === 'paid'){
           <button (click)="markAsPending(invoice.id)" class="btn btn-primary">Mark as Pending</button>
         } @else {
