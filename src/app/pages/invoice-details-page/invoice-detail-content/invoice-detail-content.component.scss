@@ -1,5 +1,7 @@
 .detail-content-wrapper {
     padding: 2rem;
+    border-radius: 8px;
+    background-color: white;
   }
   
   .detail-content {
@@ -68,6 +70,7 @@
         grid-area: 1 / 2 / 3 / 3;
         display: flex;
         align-items: center;
+        justify-content: end;
       }
     }
   }
@@ -80,6 +83,9 @@
     margin-top: 2rem;
     background: var(--dark-3);
     border-radius: 0 0 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   
   @media screen and (min-width: 768px) {

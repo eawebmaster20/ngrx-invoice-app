@@ -29,21 +29,19 @@
                 </p>
             </div>
             <div class="action-bar-action">
-                <div 
-                        Class="input-select"
-                        >
-                            <span class="selected-value" id="paymentTerms">
-                                <span class="txt"></span>
-                                <img src="assets/icons/carret.svg" alt="" srcset="">
-                            </span>
-                            <div class="input-select-options">
-                              <section class="options">
-                                <mat-checkbox color="primary" class="example-margin" [(ngModel)]="allStatus.paid">Paid</mat-checkbox>
-                                <mat-checkbox color="primary" class="example-margin" [(ngModel)]="allStatus.pending">Pending</mat-checkbox>
-                                <mat-checkbox color="primary" class="example-margin" [(ngModel)]="allStatus.draft">Draft</mat-checkbox>
-                              </section>
-                            </div>
-                        </div>
+                <div Class="input-select">
+                      <span class="selected-value" id="paymentTerms">
+                          <span class="txt"></span>
+                          <img src="assets/icons/carret.svg" alt="" srcset="">
+                      </span>
+                      <div class="input-select-options">
+                        <section class="options">
+                          <mat-checkbox color="primary" class="example-margin" [(ngModel)]="allStatus.paid" (change)="onValueChange('paid')">Paid</mat-checkbox>
+                          <mat-checkbox color="primary" class="example-margin" [(ngModel)]="allStatus.pending" (change)="onValueChange('pending')">Pending</mat-checkbox>
+                          <mat-checkbox color="primary" class="example-margin" [(ngModel)]="allStatus.draft" (change)="onValueChange('draft')">Draft</mat-checkbox>
+                        </section>
+                      </div>
+                  </div>
                         
                 <button 
                 routerLink="new"
@@ -54,8 +52,7 @@
             </div>
         </div>
         <div class="table-container">
-          <!-- @for(invoice of localInvoices ; track invoice) -->
-            @for(invoice of invoices | async; track invoice)
+            @for(invoice of invoices |async| filter:allStatus; track invoice)
             {
                 <div (click)="goToDetail(invoice.id)" class="invoice-card card">
                     <div class="invoice__id">
